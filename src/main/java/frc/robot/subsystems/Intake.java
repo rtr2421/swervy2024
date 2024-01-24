@@ -4,9 +4,17 @@
 
 package frc.robot.subsystems;
 
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
+
+import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class Intake extends SubsystemBase {
+  private static final double UPPERSPEED = -0.5;
+  private static final double LOWERSPEED = 0.5;
+  private final DigitalInput beam = new DigitalInput(0);
+  private final WPI_TalonSRX upperMotor = new WPI_TalonSRX(13);
+  private final WPI_TalonSRX lowerMotor = new WPI_TalonSRX(14);
   /** Creates a new Intake. */
   public Intake() {}
 
@@ -14,4 +22,28 @@ public class Intake extends SubsystemBase {
   public void periodic() {
     // This method will be called once per scheduler run
   }
+  /**
+   * Returns true if holding a playing piece
+   */
+  public boolean isLoaded(){
+    return beam.get();
+  }
+
+  /**
+   * Tells intake to start 
+   */
+  public void start(){
+    upperMotor.set(UPPERSPEED);
+    lowerMotor.set(LOWERSPEED);
+  }
+  /**
+   * Stops intake
+   */
+
+  public void stop(){
+    upperMotor.set(0);
+    lowerMotor.set(0);
+
+  }
+
 }

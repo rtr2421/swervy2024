@@ -8,7 +8,11 @@ import frc.robot.Constants.OperatorConstants;
 import frc.robot.commands.Autos;
 import frc.robot.commands.ExampleCommand;
 import frc.robot.commands.TeleopDrive;
+import frc.robot.subsystems.Climber;
 import frc.robot.subsystems.ExampleSubsystem;
+import frc.robot.subsystems.Indexer;
+import frc.robot.subsystems.Intake;
+import frc.robot.subsystems.Shooter;
 import frc.robot.subsystems.SwerveSubsystem;
 
 import java.io.File;
@@ -32,7 +36,10 @@ public class RobotContainer {
   // The robot's subsystems and commands are defined here...
   private final ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
   private final SwerveSubsystem drive = new SwerveSubsystem(new File(Filesystem.getDeployDirectory(), "swerve"));
-
+  private final Intake intake = new Intake();
+  private final Shooter shooter = new Shooter();
+  private final Indexer indexer = new Indexer();
+  private final Climber climber = new Climber();
   // Replace with CommandPS4Controller or CommandJoystick if needed
   private final CommandXboxController driverXbox = new CommandXboxController(OperatorConstants.kDriverControllerPort);
 

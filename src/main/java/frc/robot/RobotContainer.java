@@ -67,7 +67,7 @@ public class RobotContainer {
         () -> -MathUtil.applyDeadband(driverXbox.getLeftX(),
             OperatorConstants.LEFT_X_DEADBAND),
         () -> -driverXbox.getRightX(),
-        () -> true);
+        () -> false);
 
     drive.setDefaultCommand(teleopDrive);
   }

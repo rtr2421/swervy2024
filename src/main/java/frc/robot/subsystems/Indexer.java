@@ -4,14 +4,33 @@
 
 package frc.robot.subsystems;
 
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
+import com.revrobotics.CANSparkMax;
+import com.revrobotics.CANSparkLowLevel.MotorType;
+
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class Indexer extends SubsystemBase {
+  private final CANSparkMax indexMotor = new CANSparkMax(15, MotorType.kBrushless); 
   /** Creates a new Index. */
   public Indexer() {}
 
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
+  }
+
+  /**
+   * starts the index motor
+   */
+  public void start(){
+    indexMotor.set(1);
+  }
+
+  /**
+   * stops the index motor
+   */
+  public void stop(){
+    indexMotor.set(0);
   }
 }

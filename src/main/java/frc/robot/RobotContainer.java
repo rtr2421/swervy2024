@@ -20,7 +20,9 @@ import java.io.File;
 
 import edu.wpi.first.math.MathUtil;
 import edu.wpi.first.wpilibj.Filesystem;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 
@@ -41,6 +43,7 @@ public class RobotContainer {
   private final Shooter shooter = new Shooter();
   private final Indexer indexer = new Indexer();
   private final Climber climber = new Climber();
+  private Boolean driveMode = false;
   // Replace with CommandPS4Controller or CommandJoystick if needed
   private final CommandXboxController driverXbox = new CommandXboxController(OperatorConstants.kDriverControllerPort);
 
@@ -68,7 +71,7 @@ public class RobotContainer {
         () -> -MathUtil.applyDeadband(driverXbox.getLeftX(),
             OperatorConstants.LEFT_X_DEADBAND),
         () -> -driverXbox.getRightX(),
-        () -> false);
+        () -> driveMode);
 
     drive.setDefaultCommand(teleopDrive);
   }
@@ -97,6 +100,7 @@ public class RobotContainer {
     // cancelling on release.
 
     driverXbox.a().toggleOnTrue(new RunIntake(indexer, intake));
+    driverXbox.start().onTrue(new InstantCommand(() -> {driveMode = !driveMode; SmartDashboard.putBoolean("Drive Mode", driveMode);}));
   }
 
   /**

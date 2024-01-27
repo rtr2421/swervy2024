@@ -12,12 +12,15 @@ import frc.robot.subsystems.SwerveSubsystem;
 public class DriveDistance extends Command {
   private SwerveSubsystem swerveSubsystem;
   private Translation2d starting;
+  private double distance;
 
   /** Creates a new DriveDistance. */
-  public DriveDistance(SwerveSubsystem swerveSubsystem) {
+  public DriveDistance(SwerveSubsystem swerveSubsystem, int distance) {
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(swerveSubsystem);
     this.swerveSubsystem = swerveSubsystem;
+    this.distance = distance;
+
   }
 
   // Called when the command is initially scheduled.
@@ -29,18 +32,18 @@ public class DriveDistance extends Command {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    swerveSubsystem.drive(new ChassisSpeeds(1,0,0));
+    swerveSubsystem.drive(new ChassisSpeeds(0.025,0,0));
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    swerveSubsystem.drive(new ChassisSpeeds(0,0,0));
+    swerveSubsystem.lock();
   }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return starting.getDistance(swerveSubsystem.getPose().getTranslation()) > 1;
+    return starting.getDistance(swerveSubsystem.getPose().getTranslation()) > distance;
   }
 }

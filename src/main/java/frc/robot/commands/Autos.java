@@ -16,7 +16,7 @@ public final class Autos {
   }
 
   public static Command driveForward(SwerveSubsystem swerveSubsystem) {
-    return new DriveDistance(swerveSubsystem);
+    return new DriveDistance(swerveSubsystem, 2);
   }
 
   private Autos() {

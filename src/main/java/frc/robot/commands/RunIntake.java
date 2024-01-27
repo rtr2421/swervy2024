@@ -29,12 +29,14 @@ public class RunIntake extends Command {
   @Override
   public void execute() {
     intake.start();
+    indexer.start();
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
     intake.stop();
+    indexer.stop();
   }
 
   // Returns true when the playing piece is detected.

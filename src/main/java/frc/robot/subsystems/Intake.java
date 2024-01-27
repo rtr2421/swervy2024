@@ -26,7 +26,7 @@ public class Intake extends SubsystemBase {
    * Returns true if holding a playing piece
    */
   public boolean isLoaded(){
-    return beam.get();
+    return !(beam.get());
   }
 
   /**

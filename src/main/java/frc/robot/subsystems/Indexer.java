@@ -11,7 +11,8 @@ import com.revrobotics.CANSparkLowLevel.MotorType;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class Indexer extends SubsystemBase {
-  private final CANSparkMax indexMotor = new CANSparkMax(15, MotorType.kBrushless); 
+  private static final int motorIndexer = 15;
+  private final CANSparkMax indexMotor = new CANSparkMax(motorIndexer, MotorType.kBrushless); 
   /** Creates a new Index. */
   public Indexer() {}
 

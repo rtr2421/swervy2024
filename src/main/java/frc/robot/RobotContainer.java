@@ -7,6 +7,7 @@ package frc.robot;
 import frc.robot.Constants.OperatorConstants;
 import frc.robot.commands.Autos;
 import frc.robot.commands.ExampleCommand;
+import frc.robot.commands.RunClimber;
 import frc.robot.commands.RunIntake;
 import frc.robot.commands.TeleopDrive;
 import frc.robot.subsystems.Climber;
@@ -115,6 +116,9 @@ public class RobotContainer {
         .andThen(new WaitUntilCommand(shooter::atSpeed))
         .andThen(new RunCommand(()-> indexer.start())))
         .onFalse(new InstantCommand(()-> {shooter.stop(); indexer.stop();}));
+    driverXbox.y().onTrue(new RunClimber(climber));
+    SmartDashboard.putBoolean("Climber at top", climber.atTop());
+    
   }
 
   /**

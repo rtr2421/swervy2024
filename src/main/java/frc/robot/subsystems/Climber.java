@@ -4,14 +4,38 @@
 
 package frc.robot.subsystems;
 
+import com.revrobotics.CANSparkLowLevel.MotorType;
+import com.revrobotics.CANSparkMax;
+
+import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.Constants.MotorPorts;
 
 public class Climber extends SubsystemBase {
+  private static final double climberSpeed = 0.6;
+  private final CANSparkMax climberMotor = new CANSparkMax(MotorPorts.motorClimber, MotorType.kBrushless); 
+  private final DigitalInput magnet1 = new DigitalInput(1);
+  private final DigitalInput magnet2 = new DigitalInput(2);
   /** Creates a new Climber. */
   public Climber() {}
-
+  
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
+  }
+  public boolean atBottom(){
+    return magnet1.get();
+  }
+  public boolean atTop(){
+    return magnet2.get();
+  }
+  public void extend(){
+    climberMotor.set(climberSpeed);
+  }
+  public void retract(){
+    climberMotor.set(-climberSpeed);
+  }
+  public void stop(){
+    climberMotor.set(0);
   }
 }

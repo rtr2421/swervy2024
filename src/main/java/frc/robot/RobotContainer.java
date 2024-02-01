@@ -24,6 +24,8 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
+import edu.wpi.first.wpilibj2.command.RunCommand;
+import edu.wpi.first.wpilibj2.command.WaitUntilCommand;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 
@@ -105,6 +107,14 @@ public class RobotContainer {
 
     driverXbox.a().toggleOnTrue(new RunIntake(indexer, intake));
     driverXbox.start().onTrue(new InstantCommand(() -> {driveMode = !driveMode; SmartDashboard.putBoolean("Drive Mode", driveMode);}));
+    driverXbox.b().whileTrue(new InstantCommand(()-> shooter.lowShoot())
+        .andThen(new WaitUntilCommand(shooter::atSpeed))
+        .andThen(new RunCommand(()-> indexer.start())))
+        .onFalse(new InstantCommand(()-> {shooter.stop(); indexer.stop();}));
+    driverXbox.x().whileTrue(new InstantCommand(()-> shooter.highShoot())
+        .andThen(new WaitUntilCommand(shooter::atSpeed))
+        .andThen(new RunCommand(()-> indexer.start())))
+        .onFalse(new InstantCommand(()-> {shooter.stop(); indexer.stop();}));
   }
 
   /**

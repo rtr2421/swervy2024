@@ -26,14 +26,14 @@ public class Shooter extends SubsystemBase {
   /**
    * sets motor and flap for lowshot
    */
-  public void lowShoot(){
+  public void lowShot(){
     shooterMotor.set(0.5);
     flap.set(DoubleSolenoid.Value.kForward);
   }
   /**
    * sets motor and flap for highshot
    */
-  public void highShoot(){
+  public void highShot(){
     shooterMotor.set(1);
     flap.set(DoubleSolenoid.Value.kReverse);
   }

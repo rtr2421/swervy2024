@@ -44,4 +44,13 @@ public final class Constants {
     public static final int motorClimber = 17;
     
   }
+
+  public static class DigitalInputs {
+    public static final int NoteSensor = 0;
+    public static final int ClimberMagnet1 = 1;
+    public static final int ClimberMagnet2 = 2;
+
+  
+    
+  }
 }

@@ -9,6 +9,7 @@ import frc.robot.commands.Autos;
 import frc.robot.commands.ExampleCommand;
 import frc.robot.commands.RunClimber;
 import frc.robot.commands.RunIntake;
+import frc.robot.commands.ShootNote;
 import frc.robot.commands.TeleopDrive;
 import frc.robot.subsystems.Climber;
 import frc.robot.subsystems.ExampleSubsystem;
@@ -108,16 +109,13 @@ public class RobotContainer {
 
     driverXbox.a().toggleOnTrue(new RunIntake(indexer, intake));
     driverXbox.start().onTrue(new InstantCommand(() -> {driveMode = !driveMode; SmartDashboard.putBoolean("Drive Mode", driveMode);}));
-    driverXbox.b().whileTrue(new InstantCommand(()-> shooter.lowShoot())
+    driverXbox.b().whileTrue(new InstantCommand(()-> shooter.lowShot())
         .andThen(new WaitUntilCommand(shooter::atSpeed))
         .andThen(new RunCommand(()-> indexer.start())))
         .onFalse(new InstantCommand(()-> {shooter.stop(); indexer.stop();}));
-    driverXbox.x().whileTrue(new InstantCommand(()-> shooter.highShoot())
-        .andThen(new WaitUntilCommand(shooter::atSpeed))
-        .andThen(new RunCommand(()-> indexer.start())))
+    driverXbox.x().whileTrue(new ShootNote(shooter, indexer, true))
         .onFalse(new InstantCommand(()-> {shooter.stop(); indexer.stop();}));
     driverXbox.y().onTrue(new RunClimber(climber));
-    SmartDashboard.putBoolean("Climber at top", climber.atTop());
     
   }
 
@@ -134,6 +132,7 @@ public class RobotContainer {
   private void configureAutos() {
     autonomousChooser.setDefaultOption("example", Autos.exampleCommand(m_exampleSubsystem));
     autonomousChooser.addOption("Drive forward", Autos.driveForward(drive));
+    autonomousChooser.addOption("Shoot 2 pieces", Autos.shoot2Pieces(drive, shooter, intake, indexer));
     
     SmartDashboard.putData("auto choices", autonomousChooser);
   }

@@ -8,12 +8,13 @@ import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.Constants.DigitalInputs;
 import frc.robot.Constants.MotorPorts;
 
 public class Intake extends SubsystemBase {
   private static final double UPPERSPEED = -0.5;
   private static final double LOWERSPEED = 0.5;
-  private final DigitalInput beam = new DigitalInput(0);
+  private final DigitalInput beam = new DigitalInput(DigitalInputs.NoteSensor);
   private final WPI_TalonSRX upperMotor = new WPI_TalonSRX(MotorPorts.upperIntake);
   private final WPI_TalonSRX lowerMotor = new WPI_TalonSRX(MotorPorts.motorLower);
   /** Creates a new Intake. */

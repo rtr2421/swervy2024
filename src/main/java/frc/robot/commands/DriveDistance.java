@@ -32,7 +32,11 @@ public class DriveDistance extends Command {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    swerveSubsystem.drive(new ChassisSpeeds(0.025,0,0));
+    if (distance > 0) {
+        swerveSubsystem.drive(new ChassisSpeeds(0.025,0,0));
+    } else {
+        swerveSubsystem.drive(new ChassisSpeeds(-0.025,0,0));
+    }
   }
 
   // Called once the command ends or is interrupted.

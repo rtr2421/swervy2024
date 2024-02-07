@@ -46,6 +46,15 @@ public final class Autos {
       new ShootNote(shooter, indexer, true));
   }
 
+  public static Command outAllianceArea(SwerveSubsystem swerveSubsystem){
+    return Commands.sequence(new DriveDistance(swerveSubsystem, 8));
+  }
+  
+  public static Command singleAmp(SwerveSubsystem swerveSubsystem, Indexer indexer, Shooter shooter) {
+    return Commands.sequence(new DriveDistance(swerveSubsystem, 1),
+    new ShootNote(shooter, indexer, false));
+  }
+
   private Autos() {
     throw new UnsupportedOperationException("This is a utility class!");
   }

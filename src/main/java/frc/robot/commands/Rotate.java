@@ -14,15 +14,14 @@ public class Rotate extends Command {
 
 
   private SwerveSubsystem swerveSubsystem;
-  private int angle;
-  private Rotation2d starting;
+  private Rotation2d ending;
 
   /** Creates a new Rotate. */
   public Rotate(SwerveSubsystem swerveSubsystem, int angle) {
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(swerveSubsystem);
     this.swerveSubsystem = swerveSubsystem;
-    this.angle = angle;
+    ending = Rotation2d.fromDegrees(angle);
   }
 
   // Called when the command is initially scheduled.
@@ -34,7 +33,7 @@ public class Rotate extends Command {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    if (angle > 0){
+    if (ending.getDegrees() > 0){
       swerveSubsystem.drive(new ChassisSpeeds(0,0, 0.025));
     } else{
       swerveSubsystem.drive(new ChassisSpeeds(0,0,-0.025));
@@ -43,11 +42,14 @@ public class Rotate extends Command {
 
   // Called once the command ends or is interrupted.
   @Override
-  public void end(boolean interrupted) {}
+  public void end(boolean interrupted) {
+    swerveSubsystem.lock();
+  }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return false;
+    double errors = ending.minus(swerveSubsystem.getHeading()).getDegrees();
+    return ((Math.abs(errors) <5));
   }
 }

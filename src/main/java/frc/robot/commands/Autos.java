@@ -52,7 +52,8 @@ public final class Autos {
   
   public static Command singleAmp(SwerveSubsystem swerveSubsystem, Indexer indexer, Shooter shooter) {
     return Commands.sequence(new DriveDistance(swerveSubsystem, 1),
-    new ShootNote(shooter, indexer, false));
+    new ShootNote(shooter, indexer, false),
+    new DriveDistance(swerveSubsystem, -1));
   }
 
   private Autos() {

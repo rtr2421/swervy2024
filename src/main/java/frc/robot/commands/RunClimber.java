@@ -10,6 +10,7 @@ import frc.robot.subsystems.Climber;
 public class RunClimber extends Command {
   private Climber climber;
   private boolean climberAtBottom;
+  private boolean climberAtTop;
   
   /** Creates a new RunClimber. */
   public RunClimber(Climber climber) {
@@ -28,9 +29,11 @@ public class RunClimber extends Command {
     if (climber.atBottom() == true){
       climber.extend();
       climberAtBottom = true;
+      climberAtTop = false;
     } else if(climber.atTop() == true){
       climber.retract();
       climberAtBottom = false;
+      climberAtTop = true;
     }
   }
 
@@ -43,6 +46,6 @@ public class RunClimber extends Command {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return(climber.atBottom() == !(climberAtBottom));
+    return(climber.atBottom() == !(climberAtBottom) && climberAtTop == !(climber.atBottom()));
   }
 }

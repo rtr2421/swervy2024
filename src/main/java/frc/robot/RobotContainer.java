@@ -133,6 +133,8 @@ public class RobotContainer {
     autonomousChooser.setDefaultOption("example", Autos.exampleCommand(m_exampleSubsystem));
     autonomousChooser.addOption("Drive forward", Autos.driveForward(drive));
     autonomousChooser.addOption("Shoot 2 pieces", Autos.shoot2Pieces(drive, shooter, intake, indexer));
+    autonomousChooser.addOption("Out Alliance area", Autos.outAllianceArea(drive));
+    autonomousChooser.addOption("Shoot one amp", Autos.singleAmp(drive, indexer, shooter));
     
     SmartDashboard.putData("auto choices", autonomousChooser);
   }

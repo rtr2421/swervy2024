@@ -49,11 +49,25 @@ public final class Autos {
   public static Command outAllianceArea(SwerveSubsystem swerveSubsystem){
     return Commands.sequence(new DriveDistance(swerveSubsystem, 8));
   }
-  
-  public static Command singleAmp(SwerveSubsystem swerveSubsystem, Indexer indexer, Shooter shooter) {
+
+   public static Command singleAmp(SwerveSubsystem swerveSubsystem, Indexer indexer, Shooter shooter){
     return Commands.sequence(new DriveDistance(swerveSubsystem, 1),
     new ShootNote(shooter, indexer, false),
-    new DriveDistance(swerveSubsystem, -1));
+    new DriveDistance(swerveSubsystem, -1),
+    new Rotate(swerveSubsystem, -90));
+   }
+  
+  public static Command doubleAmp(SwerveSubsystem swerveSubsystem, Indexer indexer, Shooter shooter, Intake intake) {
+    return Commands.sequence(new DriveDistance(swerveSubsystem, 1),
+    new ShootNote(shooter, indexer, false),
+    new DriveDistance(swerveSubsystem, -1),
+    new Rotate(swerveSubsystem, -90),
+    new DriveDistance(swerveSubsystem, 2),
+    new RunIntake(indexer, intake),
+    new DriveDistance(swerveSubsystem, -2),
+    new Rotate(swerveSubsystem, 90),
+    new DriveDistance(swerveSubsystem, 1),
+    new ShootNote(shooter, indexer, false));
   }
 
   private Autos() {

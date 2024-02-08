@@ -135,7 +135,8 @@ public class RobotContainer {
     autonomousChooser.addOption("Shoot 2 pieces", Autos.shoot2Pieces(drive, shooter, intake, indexer));
     autonomousChooser.addOption("Out Alliance area", Autos.outAllianceArea(drive));
     autonomousChooser.addOption("Shoot one amp", Autos.singleAmp(drive, indexer, shooter));
-    
+    autonomousChooser.addOption("Shoot 2 amp", Autos.doubleAmp(drive, indexer, shooter, intake));
+
     SmartDashboard.putData("auto choices", autonomousChooser);
   }
 }

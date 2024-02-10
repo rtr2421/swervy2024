@@ -20,6 +20,11 @@
       "/SmartDashboard/auto choices": "String Chooser"
     },
     "windows": {
+      "/SmartDashboard/Field": {
+        "window": {
+          "visible": true
+        }
+      },
       "/SmartDashboard/auto choices": {
         "window": {
           "visible": true

@@ -9,6 +9,9 @@ import frc.robot.subsystems.Indexer;
 import frc.robot.subsystems.Intake;
 import frc.robot.subsystems.Shooter;
 import frc.robot.subsystems.SwerveSubsystem;
+
+import com.pathplanner.lib.commands.PathPlannerAuto;
+
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Commands;
 
@@ -69,8 +72,17 @@ public final class Autos {
     new DriveDistance(swerveSubsystem, 1),
     new ShootNote(shooter, indexer, false));
   }
+   public static Command shoot2HighShots(){
+    return new PathPlannerAuto("shoot2HighShots");
+  }
+  
+  public static Command testAuto(){
+    return new PathPlannerAuto("testAuto");
+  }
 
   private Autos() {
     throw new UnsupportedOperationException("This is a utility class!");
   }
+
+ 
 }

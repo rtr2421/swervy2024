@@ -20,6 +20,8 @@ import frc.robot.subsystems.SwerveSubsystem;
 
 import java.io.File;
 
+import com.pathplanner.lib.auto.NamedCommands;
+
 import edu.wpi.first.math.MathUtil;
 import edu.wpi.first.wpilibj.Filesystem;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
@@ -130,11 +132,18 @@ public class RobotContainer {
   }
 
   private void configureAutos() {
+    NamedCommands.registerCommand("shoot", new ShootNote(shooter, indexer, true).withTimeout(2)
+      .andThen(new InstantCommand(()-> {shooter.stop(); indexer.stop();})));
+    // TODO: Change timeout on above line
+    NamedCommands.registerCommand("RunIntake", new RunIntake(indexer, intake));
+
     autonomousChooser.setDefaultOption("example", Autos.exampleCommand(m_exampleSubsystem));
     autonomousChooser.addOption("Drive forward", Autos.driveForward(drive));
     autonomousChooser.addOption("Shoot 2 pieces", Autos.shoot2Pieces(drive, shooter, intake, indexer));
     autonomousChooser.addOption("Out Alliance area", Autos.outAllianceArea(drive));
     autonomousChooser.addOption("Shoot one amp", Autos.singleAmp(drive, indexer, shooter));
+    autonomousChooser.addOption("Test auto path planner", Autos.testAuto());
+    autonomousChooser.addOption("2 shot auto", Autos.shoot2HighShots());
     
     SmartDashboard.putData("auto choices", autonomousChooser);
   }

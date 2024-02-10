@@ -14,7 +14,10 @@ import frc.robot.Constants.DigitalInputs;
 import frc.robot.Constants.MotorPorts;
 
 public class Climber extends SubsystemBase {
-  private static final double climberSpeed = 0.6;
+  private static final double climberSpeed = 0.1;
+  private boolean goingUpwards;
+  public enum ClimberStateEnum {goingUp, goingDown, nothing};
+  ClimberStateEnum climberstate = ClimberStateEnum.nothing;
   private final CANSparkMax climberMotor = new CANSparkMax(MotorPorts.motorClimber, MotorType.kBrushless); 
   private final DigitalInput magnet1 = new DigitalInput(DigitalInputs.ClimberMagnet1);
   private final DigitalInput magnet2 = new DigitalInput(DigitalInputs.ClimberMagnet2);
@@ -27,6 +30,9 @@ public class Climber extends SubsystemBase {
     SmartDashboard.putBoolean("Climber at top", atTop());
   }
 
+  public ClimberStateEnum getClimberState(){
+    return climberstate;
+  }
   public boolean atBottom(){
     return !(magnet1.get());
   }
@@ -37,13 +43,26 @@ public class Climber extends SubsystemBase {
 
   public void extend(){
     climberMotor.set(climberSpeed);
+    climberstate = ClimberStateEnum.goingUp;
   }
 
   public void retract(){
     climberMotor.set(-climberSpeed);
+    climberstate = ClimberStateEnum.goingDown;
+  }
+
+
+  public void toggle(){
+    if (getClimberState() == ClimberStateEnum.goingUp || getClimberState()  == ClimberStateEnum.nothing){
+      retract();
+    } else{
+      extend();
+    }
   }
   
   public void stop(){
     climberMotor.set(0);
+   // climberstate = ClimberStateEnum.nothing;
   }
+
 }

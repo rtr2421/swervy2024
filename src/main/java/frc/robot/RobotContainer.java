@@ -117,7 +117,7 @@ public class RobotContainer {
         .onFalse(new InstantCommand(()-> {shooter.stop(); indexer.stop();}));
     driverXbox.x().whileTrue(new ShootNote(shooter, indexer, true))
         .onFalse(new InstantCommand(()-> {shooter.stop(); indexer.stop();}));
-    driverXbox.y().onTrue(new RunClimber(climber));
+    driverXbox.y().toggleOnTrue(new RunClimber(climber));
     
   }
 
@@ -144,7 +144,7 @@ public class RobotContainer {
     autonomousChooser.addOption("Shoot one amp", Autos.singleAmp(drive, indexer, shooter));
     autonomousChooser.addOption("Test auto path planner", Autos.testAuto());
     autonomousChooser.addOption("2 shot auto", Autos.shoot2HighShots());
-    
+    autonomousChooser.addOption("Shoot 2 amp", Autos.doubleAmp(drive, indexer, shooter, intake));
     SmartDashboard.putData("auto choices", autonomousChooser);
   }
 }

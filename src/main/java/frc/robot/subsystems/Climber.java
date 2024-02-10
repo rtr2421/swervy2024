@@ -43,13 +43,11 @@ public class Climber extends SubsystemBase {
 
   public void extend(){
     climberMotor.set(climberSpeed);
-    System.out.println("Extending");
     climberstate = ClimberStateEnum.goingUp;
   }
 
   public void retract(){
     climberMotor.set(-climberSpeed);
-    System.out.println("retracting");
     climberstate = ClimberStateEnum.goingDown;
   }
 

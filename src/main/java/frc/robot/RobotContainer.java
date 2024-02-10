@@ -115,7 +115,7 @@ public class RobotContainer {
         .onFalse(new InstantCommand(()-> {shooter.stop(); indexer.stop();}));
     driverXbox.x().whileTrue(new ShootNote(shooter, indexer, true))
         .onFalse(new InstantCommand(()-> {shooter.stop(); indexer.stop();}));
-    driverXbox.y().onTrue(new RunClimber(climber));
+    driverXbox.y().toggleOnTrue(new RunClimber(climber));
     
   }
 

@@ -80,6 +80,10 @@ public final class Autos {
     return new PathPlannerAuto("testAuto");
   }
 
+  public static Command shoot2FromRight(){
+    return new PathPlannerAuto("shoot2FromRight");
+  }
+
   private Autos() {
     throw new UnsupportedOperationException("This is a utility class!");
   }

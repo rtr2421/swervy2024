@@ -145,6 +145,7 @@ public class RobotContainer {
     autonomousChooser.addOption("Test auto path planner", Autos.testAuto());
     autonomousChooser.addOption("2 shot auto", Autos.shoot2HighShots());
     autonomousChooser.addOption("Shoot 2 amp", Autos.doubleAmp(drive, indexer, shooter, intake));
+    autonomousChooser.addOption("Shoot 2 pieces from the Right", Autos.shoot2FromRight());
     SmartDashboard.putData("auto choices", autonomousChooser);
   }
 }

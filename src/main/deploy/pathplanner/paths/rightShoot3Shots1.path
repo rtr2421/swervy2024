@@ -3,29 +3,29 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 2.93,
-        "y": 5.52
+        "x": 0.7220452902444284,
+        "y": 6.7095211113499165
       },
       "prevControl": null,
       "nextControl": {
-        "x": 2.9694677712432345,
-        "y": 5.505754088431254
+        "x": 1.738340399757724,
+        "y": 6.798323596647194
       },
       "isLocked": false,
-      "linkedName": "shoot2HighShots1"
+      "linkedName": null
     },
     {
       "anchor": {
-        "x": 1.36,
-        "y": 5.52
+        "x": 2.9717082511088115,
+        "y": 6.985795510052559
       },
       "prevControl": {
-        "x": 2.150090854027863,
-        "y": 5.535354916863679
+        "x": 1.9717082511088115,
+        "y": 6.985795510052559
       },
       "nextControl": null,
       "isLocked": false,
-      "linkedName": null
+      "linkedName": "rightShoot3Shots1"
     }
   ],
   "rotationTargets": [],
@@ -43,9 +43,9 @@
     "rotateFast": false
   },
   "reversed": false,
-  "folder": "shoot2HighShots",
+  "folder": "a",
   "previewStartingState": {
-    "rotation": 0,
+    "rotation": 59.82647997035569,
     "velocity": 0
   },
   "useDefaultConstraints": true

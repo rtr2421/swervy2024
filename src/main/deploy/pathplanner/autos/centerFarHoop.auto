@@ -1,12 +1,6 @@
 {
   "version": 1.0,
-  "startingPose": {
-    "position": {
-      "x": 1.36,
-      "y": 5.52
-    },
-    "rotation": 0
-  },
+  "startingPose": null,
   "command": {
     "type": "sequential",
     "data": {
@@ -18,15 +12,28 @@
           }
         },
         {
-          "type": "path",
+          "type": "race",
           "data": {
-            "pathName": "shoot2HighShots1"
+            "commands": [
+              {
+                "type": "path",
+                "data": {
+                  "pathName": "centerFarHoop1"
+                }
+              },
+              {
+                "type": "named",
+                "data": {
+                  "name": "RunIntake"
+                }
+              }
+            ]
           }
         },
         {
           "type": "path",
           "data": {
-            "pathName": "shoot2HighShots2"
+            "pathName": "centerFarHoop2"
           }
         },
         {

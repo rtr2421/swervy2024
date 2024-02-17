@@ -75,6 +75,14 @@ public final class Autos {
    public static Command shoot2HighShots(){
     return new PathPlannerAuto("shoot2HighShots");
   }
+
+  public static Command centerFarHoop(){
+    return new PathPlannerAuto("centerFarHoop");
+  }
+
+  public static Command leftShoot3Shots(){
+    return new PathPlannerAuto("leftShoot3Shots");
+  }
   
   public static Command testAuto(){
     return new PathPlannerAuto("testAuto");
@@ -83,6 +91,6 @@ public final class Autos {
   private Autos() {
     throw new UnsupportedOperationException("This is a utility class!");
   }
-
+  
  
 }

@@ -136,6 +136,7 @@ public class RobotContainer {
       .andThen(new InstantCommand(()-> {shooter.stop(); indexer.stop();})));
     // TODO: Change timeout on above line
     NamedCommands.registerCommand("RunIntake", new RunIntake(indexer, intake));
+    
 
     autonomousChooser.setDefaultOption("example", Autos.exampleCommand(m_exampleSubsystem));
     autonomousChooser.addOption("Drive forward", Autos.driveForward(drive));
@@ -144,6 +145,8 @@ public class RobotContainer {
     autonomousChooser.addOption("Shoot one amp", Autos.singleAmp(drive, indexer, shooter));
     autonomousChooser.addOption("Test auto path planner", Autos.testAuto());
     autonomousChooser.addOption("2 shot auto", Autos.shoot2HighShots());
+    autonomousChooser.addOption("centerFarHoop", Autos.centerFarHoop());
+    autonomousChooser.addOption("leftShoot3Shots", Autos.leftShoot3Shots());
     autonomousChooser.addOption("Shoot 2 amp", Autos.doubleAmp(drive, indexer, shooter, intake));
     SmartDashboard.putData("auto choices", autonomousChooser);
   }

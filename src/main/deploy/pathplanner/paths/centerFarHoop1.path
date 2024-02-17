@@ -3,68 +3,50 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 1.5,
-        "y": 5.515804013063089
+        "x": 1.2788871226815193,
+        "y": 5.574358195791997
       },
       "prevControl": null,
       "nextControl": {
-        "x": 2.5000000000000004,
-        "y": 5.515804013063089
+        "x": 2.2788871226815193,
+        "y": 5.574358195791997
       },
       "isLocked": false,
       "linkedName": null
     },
     {
       "anchor": {
-        "x": 2.8715608929078047,
-        "y": 5.51
+        "x": 5.260838983216429,
+        "y": 6.82792442507962
       },
       "prevControl": {
-        "x": 1.8715608929078047,
-        "y": 5.51
+        "x": 4.846427385162464,
+        "y": 6.689787225728298
       },
       "nextControl": {
-        "x": 3.8715608929078047,
-        "y": 5.51
+        "x": 5.9512430097646085,
+        "y": 7.058059100595679
       },
       "isLocked": false,
       "linkedName": null
     },
     {
       "anchor": {
-        "x": 1.6770555652380903,
-        "y": 5.515804013063089
+        "x": 8.28012348332389,
+        "y": 7.429807936538951
       },
       "prevControl": {
-        "x": 2.0248146901429283,
-        "y": 5.504093176517308
+        "x": 7.648639143432135,
+        "y": 7.291670737187629
       },
       "nextControl": null,
       "isLocked": false,
-      "linkedName": null
+      "linkedName": "centerFarHoop1"
     }
   ],
   "rotationTargets": [],
   "constraintZones": [],
-  "eventMarkers": [
-    {
-      "name": "turnOnIntake",
-      "waypointRelativePos": 0.15,
-      "command": {
-        "type": "sequential",
-        "data": {
-          "commands": [
-            {
-              "type": "named",
-              "data": {
-                "name": "runIntake"
-              }
-            }
-          ]
-        }
-      }
-    }
-  ],
+  "eventMarkers": [],
   "globalConstraints": {
     "maxVelocity": 3.0,
     "maxAcceleration": 3.0,
@@ -73,11 +55,11 @@
   },
   "goalEndState": {
     "velocity": 0,
-    "rotation": 0,
+    "rotation": -27.09555249375185,
     "rotateFast": false
   },
   "reversed": false,
-  "folder": null,
+  "folder": "centerFarHoop",
   "previewStartingState": {
     "rotation": 0,
     "velocity": 0

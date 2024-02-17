@@ -173,6 +173,7 @@ public class SwerveSubsystem extends SubsystemBase {
 
   @Override
   public void periodic() {
+    SmartDashboard.putNumber("rotation", swerveDrive.getPitch().getDegrees());
   }
 
   @Override

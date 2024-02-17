@@ -7,11 +7,13 @@ package frc.robot.subsystems;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
 import edu.wpi.first.wpilibj.DigitalInput;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants.DigitalInputs;
 import frc.robot.Constants.MotorPorts;
 
 public class Intake extends SubsystemBase {
+  private boolean isRunning = false;
   private static final double UPPERSPEED = -0.5;
   private static final double LOWERSPEED = 0.5;
   private final DigitalInput beam = new DigitalInput(DigitalInputs.NoteSensor);
@@ -23,6 +25,8 @@ public class Intake extends SubsystemBase {
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
+    SmartDashboard.putBoolean( "Has Game Piece?", isLoaded());
+    SmartDashboard.putBoolean( "Is Intake Running?", isRunning);
   }
   /**
    * Returns true if holding a playing piece
@@ -37,7 +41,11 @@ public class Intake extends SubsystemBase {
   public void start(){
     upperMotor.set(UPPERSPEED);
     lowerMotor.set(LOWERSPEED);
+    isRunning = true;
   }
+
+
+
   /**
    * Stops intake
    */
@@ -45,7 +53,7 @@ public class Intake extends SubsystemBase {
   public void stop(){
     upperMotor.set(0);
     lowerMotor.set(0);
-
+    isRunning = false;
   }
 
 }

@@ -6,13 +6,12 @@ package frc.robot;
 
 import frc.robot.Constants.OperatorConstants;
 import frc.robot.commands.Autos;
-import frc.robot.commands.ExampleCommand;
 import frc.robot.commands.RunClimber;
 import frc.robot.commands.RunIntake;
 import frc.robot.commands.ShootNote;
 import frc.robot.commands.TeleopDrive;
 import frc.robot.subsystems.Climber;
-import frc.robot.subsystems.ExampleSubsystem;
+
 import frc.robot.subsystems.Indexer;
 import frc.robot.subsystems.Intake;
 import frc.robot.subsystems.Shooter;
@@ -44,7 +43,7 @@ import edu.wpi.first.wpilibj2.command.button.Trigger;
  */
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
-  private final ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
+
   private final SwerveSubsystem drive = new SwerveSubsystem(new File(Filesystem.getDeployDirectory(), "swerve"));
   private final Intake intake = new Intake();
   private final Shooter shooter = new Shooter();
@@ -102,8 +101,7 @@ public class RobotContainer {
    */
   private void configureBindings() {
     // Schedule `ExampleCommand` when `exampleCondition` changes to `true`
-    new Trigger(m_exampleSubsystem::exampleCondition)
-        .onTrue(new ExampleCommand(m_exampleSubsystem));
+    
 
     // Schedule `exampleMethodCommand` when the Xbox controller's B button is
     // pressed,
@@ -138,8 +136,8 @@ public class RobotContainer {
     NamedCommands.registerCommand("RunIntake", new RunIntake(indexer, intake));
     
 
-    autonomousChooser.setDefaultOption("example", Autos.exampleCommand(m_exampleSubsystem));
-    autonomousChooser.addOption("Drive forward", Autos.driveForward(drive));
+   
+    autonomousChooser.setDefaultOption("Drive forward", Autos.driveForward(drive));
     autonomousChooser.addOption("Shoot 2 pieces", Autos.shoot2Pieces(drive, shooter, intake, indexer));
     autonomousChooser.addOption("Out Alliance area", Autos.outAllianceArea(drive));
     autonomousChooser.addOption("Shoot one amp", Autos.singleAmp(drive, indexer, shooter));

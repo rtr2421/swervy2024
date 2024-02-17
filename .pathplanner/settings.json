@@ -3,7 +3,8 @@
   "robotLength": 0.9144,
   "holonomicMode": true,
   "pathFolders": [
-    "a",
+    "leftFar",
+    "rightShoot",
     "centerFarHoop",
     "shoot2HighShots",
     "toTheLeft"

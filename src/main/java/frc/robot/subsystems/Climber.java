@@ -28,6 +28,7 @@ public class Climber extends SubsystemBase {
   public void periodic() {
     // This method will be called once per scheduler run
     SmartDashboard.putBoolean("Climber at top", atTop());
+    SmartDashboard.putString( "Climber Status", status());
   }
 
   public ClimberStateEnum getClimberState(){
@@ -35,6 +36,16 @@ public class Climber extends SubsystemBase {
   }
   public boolean atBottom(){
     return !(magnet1.get());
+  }
+
+  private String status(){
+    if (climberstate == ClimberStateEnum.goingDown){
+      return "Climber is going Down";
+    } else if (climberstate == ClimberStateEnum.goingUp){
+      return "Climber is going Up";
+    } else{
+      return "Climber is not moving";
+    }
   }
 
   public boolean atTop(){

@@ -12,44 +12,13 @@
           }
         },
         {
-          "type": "path",
-          "data": {
-            "pathName": "toTheLeft1"
-          }
-        },
-        {
           "type": "race",
           "data": {
             "commands": [
               {
                 "type": "path",
                 "data": {
-                  "pathName": "toTheLeft2"
-                }
-              },
-              {
-                "type": "named",
-                "data": {
-                  "name": "RunIntake"
-                }
-              }
-            ]
-          }
-        },
-        {
-          "type": "named",
-          "data": {
-            "name": "shoot"
-          }
-        },
-        {
-          "type": "race",
-          "data": {
-            "commands": [
-              {
-                "type": "path",
-                "data": {
-                  "pathName": "toTheLeft3"
+                  "pathName": "centerFarHoop1"
                 }
               },
               {
@@ -64,7 +33,7 @@
         {
           "type": "path",
           "data": {
-            "pathName": "toTheLeft4"
+            "pathName": "centerFarHoop2"
           }
         },
         {

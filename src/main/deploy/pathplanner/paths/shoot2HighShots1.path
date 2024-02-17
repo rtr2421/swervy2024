@@ -16,16 +16,16 @@
     },
     {
       "anchor": {
-        "x": 2.922373537054768,
+        "x": 2.9,
         "y": 5.52
       },
       "prevControl": {
-        "x": 1.922373537054768,
+        "x": 1.9,
         "y": 5.52
       },
       "nextControl": null,
       "isLocked": false,
-      "linkedName": "shoot2HighShots1"
+      "linkedName": null
     }
   ],
   "rotationTargets": [],

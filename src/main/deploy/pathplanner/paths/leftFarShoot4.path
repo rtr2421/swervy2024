@@ -3,29 +3,45 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 1.3633965729469937,
-        "y": 5.574358195791997
+        "x": 8.349192082999553,
+        "y": 2.4470018170805568
       },
       "prevControl": null,
       "nextControl": {
-        "x": 2.3633965729469963,
-        "y": 5.574358195791997
+        "x": 7.382231687540299,
+        "y": 2.012856333404975
+      },
+      "isLocked": false,
+      "linkedName": "leftFarshoot3"
+    },
+    {
+      "anchor": {
+        "x": 4.047205017486959,
+        "y": 2.0819249330806366
+      },
+      "prevControl": {
+        "x": 5.096261049889765,
+        "y": 1.5573969168792332
+      },
+      "nextControl": {
+        "x": 2.9618413082980024,
+        "y": 2.6246067876751153
       },
       "isLocked": false,
       "linkedName": null
     },
     {
       "anchor": {
-        "x": 2.8927727086223416,
-        "y": 5.574358195791997
+        "x": 0.7220452902444284,
+        "y": 4.351321779566637
       },
       "prevControl": {
-        "x": 2.3204900255954373,
-        "y": 5.594556573728532
+        "x": 1.9850139700279412,
+        "y": 3.335026670053341
       },
       "nextControl": null,
       "isLocked": false,
-      "linkedName": "centerFarHoop2"
+      "linkedName": null
     }
   ],
   "rotationTargets": [],
@@ -39,11 +55,11 @@
   },
   "goalEndState": {
     "velocity": 0,
-    "rotation": 1.3639275316029158,
+    "rotation": -61.69924423399365,
     "rotateFast": false
   },
   "reversed": false,
-  "folder": "centerFarHoop",
+  "folder": "leftFar",
   "previewStartingState": {
     "rotation": 0,
     "velocity": 0

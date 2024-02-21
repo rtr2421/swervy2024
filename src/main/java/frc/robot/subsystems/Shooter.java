@@ -28,7 +28,7 @@ public class Shooter extends SubsystemBase {
   private double highReference = 600;
   private boolean shootHigh;
   // PID coefficients
-  private final double kP = 6e-5;
+  private final double kP = 6e-2;
   private final double kI = 0;
   private final double kD = 0;
   private final double kIz = 0;
@@ -75,7 +75,8 @@ public class Shooter extends SubsystemBase {
    * sets motor and flap for highshot
    */
   public void highShot() {
-    shooterPid.setReference(highReference, CANSparkMax.ControlType.kSmartVelocity);
+    //shooterPid.setReference(highReference, CANSparkMax.ControlType.kSmartVelocity);
+    shooterMotor.set(1);
     flap.set(DoubleSolenoid.Value.kReverse);
     shootHigh = true;
   }
@@ -92,11 +93,13 @@ public class Shooter extends SubsystemBase {
    * Returns true if at right speed
    */
   public boolean atSpeed() {
+    return true;
+    /* 
     if (shootHigh){
       return (highReference - 20 < shooterEncoder.getVelocity() && shooterEncoder.getVelocity() < highReference + 20);
     } else {
       return (lowReference - 20 < shooterEncoder.getVelocity() && shooterEncoder.getVelocity() < lowReference + 20);
-    }
+    }*/
   }
 
 }

@@ -6,6 +6,7 @@ package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.revrobotics.CANSparkMax;
+import com.revrobotics.CANSparkBase.IdleMode;
 import com.revrobotics.CANSparkLowLevel.MotorType;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
@@ -14,7 +15,9 @@ public class Indexer extends SubsystemBase {
   private static final int motorIndexer = 15;
   private final CANSparkMax indexMotor = new CANSparkMax(motorIndexer, MotorType.kBrushless); 
   /** Creates a new Index. */
-  public Indexer() {}
+  public Indexer() {
+    indexMotor.setIdleMode(IdleMode.kBrake);
+  }
 
   @Override
   public void periodic() {
@@ -25,7 +28,7 @@ public class Indexer extends SubsystemBase {
    * starts the index motor
    */
   public void start(){
-    indexMotor.set(1);
+    indexMotor.set(-1);
   }
 
   /**

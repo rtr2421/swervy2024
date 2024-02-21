@@ -81,6 +81,10 @@ public final class Autos {
   public static Command leftShoot3Shots(){
     return new PathPlannerAuto("leftShoot3shots");
   }
+
+  public static Command forwardandback(){
+    return new PathPlannerAuto("forwardandback");
+  }
   
 
 

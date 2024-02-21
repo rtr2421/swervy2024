@@ -146,6 +146,7 @@ public class RobotContainer {
     autonomousChooser.addOption("centerFarHoop", Autos.centerFarHoop());
     autonomousChooser.addOption("leftShoot3Shots", Autos.leftShoot3Shots());
     autonomousChooser.addOption("Shoot 2 amp", Autos.doubleAmp(drive, indexer, shooter, intake));
+    autonomousChooser.addOption("Drive forward and backwards", Autos.forwardandback());
     SmartDashboard.putData("auto choices", autonomousChooser);
   }
 }

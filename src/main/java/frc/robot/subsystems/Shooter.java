@@ -53,13 +53,13 @@ public class Shooter extends SubsystemBase {
   public void periodic() {
     // This method will be called once per scheduler run
     // display PID coefficients on SmartDashboard
-    SmartDashboard.putNumber("P Gain", kP);
+   /*  SmartDashboard.putNumber("P Gain", kP);
     SmartDashboard.putNumber("I Gain", kI);
     SmartDashboard.putNumber("D Gain", kD);
     SmartDashboard.putNumber("I Zone", kIz);
     SmartDashboard.putNumber("Feed Forward", kFF);
     SmartDashboard.putNumber("Max Output", kMaxOutput);
-    SmartDashboard.putNumber("Min Output", kMinOutput);
+    SmartDashboard.putNumber("Min Output", kMinOutput);*/
   }
 
   /**
@@ -76,7 +76,7 @@ public class Shooter extends SubsystemBase {
    */
   public void highShot() {
     //shooterPid.setReference(highReference, CANSparkMax.ControlType.kSmartVelocity);
-    shooterMotor.set(1);
+    shooterMotor.set(0.2);
     flap.set(DoubleSolenoid.Value.kReverse);
     shootHigh = true;
   }

@@ -21,7 +21,7 @@ public class ShootNote extends SequentialCommandGroup {
     
     if (highShot) {
       addCommands(new InstantCommand(()-> shooter.highShot())
-        .andThen(new WaitUntilCommand(shooter::atSpeed))
+       // .andThen(new WaitUntilCommand(shooter::atSpeed))
         .andThen(new WaitCommand(1))
         .andThen(new RunCommand(()-> indexer.start())));
   

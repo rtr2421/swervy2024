@@ -20,9 +20,11 @@ import frc.robot.subsystems.SwerveSubsystem;
 import java.io.File;
 
 import com.pathplanner.lib.auto.NamedCommands;
+import com.pathplanner.lib.util.PathPlannerLogging;
 
 import edu.wpi.first.math.MathUtil;
 import edu.wpi.first.wpilibj.Filesystem;
+import edu.wpi.first.wpilibj.smartdashboard.Field2d;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
@@ -54,26 +56,18 @@ public class RobotContainer {
   private final CommandXboxController driverXbox = new CommandXboxController(OperatorConstants.kDriverControllerPort);
   private SendableChooser<Command> autonomousChooser = new SendableChooser<>();
 
-
+ private final Field2d field;
   /**
    * The container for the robot. Contains subsystems, OI devices, and commands.
    */
   public RobotContainer() {
-    drive.zeroGyro();
     // Configure the trigger bindings
     configureBindings();
     configureAutos();
-    /*
-    AbsoluteDrive closedAbsoluteDrive = new AbsoluteDrive(drive,
-        // Applies deadbands and inverts controls because joysticks
-        // are back-right positive while robot
-        // controls are front-left positive
-        () -> MathUtil.applyDeadband(driverXbox.getLeftY(),
-            OperatorConstants.LEFT_Y_DEADBAND),
-        () -> MathUtil.applyDeadband(driverXbox.getLeftX(),
-            OperatorConstants.LEFT_X_DEADBAND),
-        () -> -driverXbox.getRightX(),
-        () -> -driverXbox.getRightY()); */
+    field = new Field2d();
+        SmartDashboard.putData("Field", field);
+
+    
     TeleopDrive teleopDrive = new TeleopDrive(drive,
         () -> -MathUtil.applyDeadband(driverXbox.getLeftY(),
             OperatorConstants.LEFT_Y_DEADBAND),
@@ -83,6 +77,26 @@ public class RobotContainer {
         () -> driveMode);
 
     drive.setDefaultCommand(teleopDrive);
+
+         // Logging callback for current robot pose
+        PathPlannerLogging.setLogCurrentPoseCallback((pose) -> {
+            // Do whatever you want with the pose here
+            field.setRobotPose(pose);
+            SmartDashboard.putNumber("CurrentX", pose.getX());
+        });
+
+        // Logging callback for target robot pose
+        PathPlannerLogging.setLogTargetPoseCallback((pose) -> {
+            // Do whatever you want with the pose here
+            field.getObject("target pose").setPose(pose);
+            SmartDashboard.putNumber("TargetX", pose.getX());
+        });
+
+        // Logging callback for the active path, this is sent as a list of poses
+        PathPlannerLogging.setLogActivePathCallback((poses) -> {
+            // Do whatever you want with the poses here
+            field.getObject("path").setPoses(poses);
+        });
   }
 
   /**
@@ -146,6 +160,9 @@ public class RobotContainer {
     autonomousChooser.addOption("centerFarHoop", Autos.centerFarHoop());
     autonomousChooser.addOption("leftShoot3Shots", Autos.leftShoot3Shots());
     autonomousChooser.addOption("Shoot 2 amp", Autos.doubleAmp(drive, indexer, shooter, intake));
+    
+    autonomousChooser.addOption("Sean", Autos.sean());
+    autonomousChooser.addOption("dumb", Autos.dumbAuto(drive));
     SmartDashboard.putData("auto choices", autonomousChooser);
   }
 }

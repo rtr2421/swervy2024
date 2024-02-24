@@ -15,7 +15,7 @@ import frc.robot.Constants.MotorPorts;
 public class Intake extends SubsystemBase {
   private boolean isRunning = false;
   private static final double UPPERSPEED = -1.0;
-  private static final double LOWERSPEED = 1.;
+  private static final double LOWERSPEED = -1.0;
   private final DigitalInput beam = new DigitalInput(DigitalInputs.NoteSensor);
   private final WPI_TalonSRX upperMotor = new WPI_TalonSRX(MotorPorts.upperIntake);
   private final WPI_TalonSRX lowerMotor = new WPI_TalonSRX(MotorPorts.motorLower);

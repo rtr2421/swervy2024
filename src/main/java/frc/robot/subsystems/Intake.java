@@ -44,6 +44,11 @@ public class Intake extends SubsystemBase {
     isRunning = true;
   }
 
+  /** Runs the intake in reverse, such as to push a stuck piece out */
+  public void reverse() {
+    upperMotor.set(-UPPERSPEED);
+    lowerMotor.set(-LOWERSPEED);
+  }
 
 
   /**

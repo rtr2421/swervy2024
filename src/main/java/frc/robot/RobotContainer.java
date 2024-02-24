@@ -130,7 +130,12 @@ public class RobotContainer {
     driverXbox.x().whileTrue(new ShootNote(shooter, indexer, true))
         .onFalse(new InstantCommand(()-> {shooter.stop(); indexer.stop();}));
     driverXbox.y().toggleOnTrue(new RunClimber(climber));
+
     
+    driverXbox
+        .leftBumper()
+        .whileTrue(new InstantCommand(() -> intake.reverse(), intake))
+        .onFalse(new InstantCommand(()-> intake.stop(), intake)); 
   }
 
   /**

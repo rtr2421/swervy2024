@@ -23,6 +23,8 @@ import com.pathplanner.lib.auto.NamedCommands;
 import com.pathplanner.lib.util.PathPlannerLogging;
 
 import edu.wpi.first.math.MathUtil;
+import edu.wpi.first.math.geometry.Pose2d;
+import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.wpilibj.Filesystem;
 import edu.wpi.first.wpilibj.smartdashboard.Field2d;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
@@ -136,6 +138,8 @@ public class RobotContainer {
         .leftBumper()
         .whileTrue(new InstantCommand(() -> { indexer.reverse(); intake.reverse(); }, intake))
         .onFalse(new InstantCommand(()-> { indexer.stop(); intake.stop(); }, intake)); 
+    
+    SmartDashboard.putData("Reset Pose", new InstantCommand(()-> resetPoseAngle()));
   }
 
   /**
@@ -162,4 +166,11 @@ public class RobotContainer {
     autonomousChooser.addOption("Centered Shoot 2 Non path planner", Autos.shoot2Pieces(drive, shooter, intake, indexer));
     SmartDashboard.putData("auto choices", autonomousChooser);
   }
+
+private void resetPoseAngle(){
+  var currentPose = drive.getPose();
+  var newPose = new Pose2d(currentPose.getTranslation(), new Rotation2d(0));
+  drive.resetOdometry(newPose);
+}
+
 }

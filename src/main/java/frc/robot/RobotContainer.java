@@ -154,20 +154,12 @@ public class RobotContainer {
     // TODO: Change timeout on above line
     NamedCommands.registerCommand("RunIntake", new RunIntake(indexer, intake));
     
-
-   
     autonomousChooser.setDefaultOption("Drive forward", Autos.driveForward(drive));
-    autonomousChooser.addOption("Shoot 2 pieces", Autos.shoot2Pieces(drive, shooter, intake, indexer));
-    autonomousChooser.addOption("Out Alliance area", Autos.outAllianceArea(drive));
-    autonomousChooser.addOption("Shoot one amp", Autos.singleAmp(drive, indexer, shooter));
-    autonomousChooser.addOption("Test auto path planner", Autos.testAuto());
-    autonomousChooser.addOption("2 shot auto", Autos.shoot2HighShots());
-    autonomousChooser.addOption("centerFarHoop", Autos.centerFarHoop());
-    autonomousChooser.addOption("leftShoot3Shots", Autos.leftShoot3Shots());
-    autonomousChooser.addOption("Shoot 2 amp", Autos.doubleAmp(drive, indexer, shooter, intake));
+    autonomousChooser.addOption("Centered 2 shot auto", Autos.shoot2HighShots());
+    autonomousChooser.addOption("Centered 2 shot + center far Hoop", Autos.centerFarHoop());
+    autonomousChooser.addOption("Left side Shoot 3 Shots", Autos.leftShoot3Shots());
     
-    autonomousChooser.addOption("Sean", Autos.sean());
-    autonomousChooser.addOption("dumb", Autos.dumbAuto(drive));
+    autonomousChooser.addOption("Centered Shoot 2 Non path planner", Autos.shoot2Pieces(drive, shooter, intake, indexer));
     SmartDashboard.putData("auto choices", autonomousChooser);
   }
 }

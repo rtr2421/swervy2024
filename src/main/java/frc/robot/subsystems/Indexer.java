@@ -28,7 +28,7 @@ public class Indexer extends SubsystemBase {
    * starts the index motor
    */
   public void start(){
-    indexMotor.set(-1);
+    indexMotor.set(-0.7);
   }
 
   /**

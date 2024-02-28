@@ -49,7 +49,7 @@ public class RobotContainer {
   private final Shooter shooter = new Shooter();
   private final Indexer indexer = new Indexer();
   private final Climber climber = new Climber();
-  private Boolean driveMode = false;
+  private Boolean driveMode = true;
   // Replace with CommandPS4Controller or CommandJoystick if needed
   private final CommandXboxController driverXbox = new CommandXboxController(OperatorConstants.kDriverControllerPort);
   private SendableChooser<Command> autonomousChooser = new SendableChooser<>();

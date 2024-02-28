@@ -50,41 +50,15 @@ public final class Autos {
       new ShootNote(shooter, indexer, true));
   }
 
-  public static Command outAllianceArea(SwerveSubsystem swerveSubsystem){
-    return Commands.sequence(new DriveDistance(swerveSubsystem, 8));
-  }
 
-   public static Command singleAmp(SwerveSubsystem swerveSubsystem, Indexer indexer, Shooter shooter){
-    return Commands.sequence(new DriveDistance(swerveSubsystem, 1),
-    new ShootNote(shooter, indexer, false),
-    new DriveDistance(swerveSubsystem, -1),
-    new Rotate(swerveSubsystem, -90));
-   }
 
-   public static Command dumbAuto(SwerveSubsystem drive) {
-    Translation2d v = new Translation2d(1, 0);
-    return new RunCommand(() -> drive.drive(v, 0, false));
-   }
-  
-  public static Command doubleAmp(SwerveSubsystem swerveSubsystem, Indexer indexer, Shooter shooter, Intake intake) {
-    return Commands.sequence(new DriveDistance(swerveSubsystem, 1),
-    new ShootNote(shooter, indexer, false),
-    new DriveDistance(swerveSubsystem, -1),
-    new Rotate(swerveSubsystem, -90),
-    new DriveDistance(swerveSubsystem, 2),
-    new RunIntake(indexer, intake),
-    new DriveDistance(swerveSubsystem, -2),
-    new Rotate(swerveSubsystem, 90),
-    new DriveDistance(swerveSubsystem, 1),
-    new ShootNote(shooter, indexer, false));
-  }
+
+
    public static Command shoot2HighShots(){
     return new PathPlannerAuto("shoot2HighShots");
   }
 
-  public static Command sean() {
-    return new PathPlannerAuto("sean1");
-  }
+  
   public static Command centerFarHoop(){
     return new PathPlannerAuto("centerFarHoop");
   }
@@ -95,9 +69,7 @@ public final class Autos {
   
 
 
-  public static Command testAuto(){
-    return new PathPlannerAuto("testAuto");
-  }
+
 
   private Autos() {
     throw new UnsupportedOperationException("This is a utility class!");

@@ -146,6 +146,7 @@ public class RobotContainer {
         .onFalse(new InstantCommand(()-> { indexer.stop(); intake.stop(); }, intake)); 
     
     SmartDashboard.putData("Reset Pose", new InstantCommand(()-> resetPoseAngle()));
+    SmartDashboard.putData("Override Climber Safety", new StartEndCommand(() -> climber.setSafety(false), () -> climber.setSafety(true)));
   }
 
   /**

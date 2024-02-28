@@ -25,10 +25,17 @@ public class Indexer extends SubsystemBase {
   }
 
   /**
+   * reverses the index motor
+   */
+  public void reverse(){
+    indexMotor.set(0.5);
+  }
+
+  /**
    * starts the index motor
    */
   public void start(){
-    indexMotor.set(-1);
+    indexMotor.set(-0.5);
   }
 
   /**

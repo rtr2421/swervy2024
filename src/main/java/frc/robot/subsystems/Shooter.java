@@ -22,10 +22,10 @@ public class Shooter extends SubsystemBase {
   private final CANSparkMax shooterMotor = new CANSparkMax(MotorPorts.motorShooter, MotorType.kBrushless);
   private final DoubleSolenoid flap = new DoubleSolenoid(PneumaticsModuleType.REVPH, PneumaticPorts.flapForward,
       PneumaticPorts.flapReverse);
-  private final RelativeEncoder shooterEncoder = shooterMotor.getEncoder(Type.kHallSensor, 42);
+  private final RelativeEncoder shooterEncoder = shooterMotor.getEncoder();
   private SparkPIDController shooterPid = shooterMotor.getPIDController();
-  private double lowReference = 200;
-  private double highReference = 600;
+  private double lowReference = 700;
+  private double highReference = 6000;
   private boolean shootHigh;
   // PID coefficients
   private final double kP = 6e-2;
@@ -51,15 +51,7 @@ public class Shooter extends SubsystemBase {
 
   @Override
   public void periodic() {
-    // This method will be called once per scheduler run
-    // display PID coefficients on SmartDashboard
-    SmartDashboard.putNumber("P Gain", kP);
-    SmartDashboard.putNumber("I Gain", kI);
-    SmartDashboard.putNumber("D Gain", kD);
-    SmartDashboard.putNumber("I Zone", kIz);
-    SmartDashboard.putNumber("Feed Forward", kFF);
-    SmartDashboard.putNumber("Max Output", kMaxOutput);
-    SmartDashboard.putNumber("Min Output", kMinOutput);
+    SmartDashboard.putNumber("ShooterSpeed", shooterEncoder.getVelocity());
   }
 
   /**
@@ -67,7 +59,7 @@ public class Shooter extends SubsystemBase {
    */
   public void lowShot() {
     flap.set(DoubleSolenoid.Value.kForward);
-    shooterPid.setReference(lowReference, CANSparkMax.ControlType.kSmartVelocity);
+    //shooterPid.setReference(lowReference, CANSparkMax.ControlType.kSmartVelocity);
     shootHigh = false;
   }
 

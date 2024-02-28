@@ -18,9 +18,22 @@
           }
         },
         {
-          "type": "path",
+          "type": "parallel",
           "data": {
-            "pathName": "shoot2HighShots1"
+            "commands": [
+              {
+                "type": "path",
+                "data": {
+                  "pathName": "shoot2HighShots1"
+                }
+              },
+              {
+                "type": "named",
+                "data": {
+                  "name": "RunIntake"
+                }
+              }
+            ]
           }
         },
         {

@@ -12,8 +12,11 @@ import frc.robot.subsystems.SwerveSubsystem;
 
 import com.pathplanner.lib.commands.PathPlannerAuto;
 
+import edu.wpi.first.math.geometry.Translation2d;
+import edu.wpi.first.math.kinematics.ChassisSpeeds;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Commands;
+import edu.wpi.first.wpilibj2.command.RunCommand;
 
 public final class Autos {
   /** Example static factory for an autonomous command. */
@@ -57,6 +60,11 @@ public final class Autos {
     new DriveDistance(swerveSubsystem, -1),
     new Rotate(swerveSubsystem, -90));
    }
+
+   public static Command dumbAuto(SwerveSubsystem drive) {
+    Translation2d v = new Translation2d(1, 0);
+    return new RunCommand(() -> drive.drive(v, 0, false));
+   }
   
   public static Command doubleAmp(SwerveSubsystem swerveSubsystem, Indexer indexer, Shooter shooter, Intake intake) {
     return Commands.sequence(new DriveDistance(swerveSubsystem, 1),
@@ -74,6 +82,9 @@ public final class Autos {
     return new PathPlannerAuto("shoot2HighShots");
   }
 
+  public static Command sean() {
+    return new PathPlannerAuto("sean1");
+  }
   public static Command centerFarHoop(){
     return new PathPlannerAuto("centerFarHoop");
   }

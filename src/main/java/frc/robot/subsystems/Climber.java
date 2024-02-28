@@ -74,6 +74,11 @@ public class Climber extends SubsystemBase {
     climberstate = ClimberStateEnum.goingDown;
   }
 
+  public void setSafety(boolean safe) {
+    climberMotor.enableSoftLimit(CANSparkMax.SoftLimitDirection.kForward, safe);
+    climberMotor.enableSoftLimit(CANSparkMax.SoftLimitDirection.kReverse, safe);
+  }
+
 
   public void toggle(){
     if (getClimberState() == ClimberStateEnum.goingUp || getClimberState()  == ClimberStateEnum.nothing){

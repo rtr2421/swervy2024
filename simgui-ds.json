@@ -27,9 +27,9 @@
       ],
       "povConfig": [
         {
-          "key0": 328,
+          "key0": 265,
           "key135": 323,
-          "key180": 322,
+          "key180": 264,
           "key225": 321,
           "key270": 324,
           "key315": 327,
@@ -65,10 +65,6 @@
         {
           "decKey": 263,
           "incKey": 262
-        },
-        {
-          "decKey": 265,
-          "incKey": 264
         }
       ],
       "axisCount": 2,
@@ -90,12 +86,6 @@
     }
   ],
   "robotJoysticks": [
-    {
-      "guid": "78696e70757401000000000000000000",
-      "useGamepad": true
-    },
-    {},
-    {},
     {
       "guid": "Keyboard0"
     }

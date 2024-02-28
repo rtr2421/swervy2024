@@ -4,8 +4,10 @@
 
 package frc.robot.subsystems;
 
+import com.revrobotics.CANSparkBase;
 import com.revrobotics.CANSparkLowLevel.MotorType;
 import com.revrobotics.CANSparkMax;
+import com.revrobotics.REVLibError;
 
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -14,15 +16,25 @@ import frc.robot.Constants.DigitalInputs;
 import frc.robot.Constants.MotorPorts;
 
 public class Climber extends SubsystemBase {
-  private static final double climberSpeed = 0.1;
+  private static final double climberSpeed = 0.5;
   private boolean goingUpwards;
   public enum ClimberStateEnum {goingUp, goingDown, nothing};
   ClimberStateEnum climberstate = ClimberStateEnum.nothing;
   private final CANSparkMax climberMotor = new CANSparkMax(MotorPorts.motorClimber, MotorType.kBrushless); 
   private final DigitalInput magnet1 = new DigitalInput(DigitalInputs.ClimberMagnet1);
   private final DigitalInput magnet2 = new DigitalInput(DigitalInputs.ClimberMagnet2);
+
+  
+
   /** Creates a new Climber. */
-  public Climber() {}
+  public Climber() {
+    climberMotor.enableSoftLimit(CANSparkMax.SoftLimitDirection.kForward, true);
+    climberMotor.enableSoftLimit(CANSparkMax.SoftLimitDirection.kReverse, true);
+    climberMotor.setSoftLimit(CANSparkMax.SoftLimitDirection.kForward, 15);
+    climberMotor.setSoftLimit(CANSparkMax.SoftLimitDirection.kReverse, 0);
+
+    climberMotor.getEncoder().setPosition(0);
+  }
   
   @Override
   public void periodic() {

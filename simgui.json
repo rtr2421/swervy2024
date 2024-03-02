@@ -17,6 +17,7 @@
     "types": {
       "/FMSInfo": "FMSInfo",
       "/SmartDashboard/Field": "Field2d",
+      "/SmartDashboard/Override Climber Safety": "Command",
       "/SmartDashboard/Reset Pose": "Command",
       "/SmartDashboard/auto choices": "String Chooser"
     },

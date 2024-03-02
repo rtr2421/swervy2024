@@ -67,6 +67,13 @@ public final class Autos {
     return new PathPlannerAuto("leftShoot3shots");
   }
   
+  public static Command simpleAutoRight() {
+    return new PathPlannerAuto("simpleAutoRight");
+  }
+
+  public static Command simpleAutoLeft() {
+    return new PathPlannerAuto("simpleAutoLeft");
+  }
 
 
 

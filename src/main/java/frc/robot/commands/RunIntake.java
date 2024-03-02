@@ -29,7 +29,7 @@ public class RunIntake extends Command {
   @Override
   public void execute() {
     intake.start();
-    indexer.start();
+    indexer.startIntaking();
   }
 
   // Called once the command ends or is interrupted.

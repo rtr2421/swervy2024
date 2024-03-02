@@ -28,14 +28,18 @@ public class Indexer extends SubsystemBase {
    * reverses the index motor
    */
   public void reverse(){
-    indexMotor.set(0.5);
+    indexMotor.set(1);
   }
 
   /**
    * starts the index motor
    */
-  public void start(){
-    indexMotor.set(-0.5);
+  public void startIntaking(){
+    indexMotor.set(-0.4);
+  }
+
+  public void startShooting(){
+    indexMotor.set(-1);
   }
 
   /**

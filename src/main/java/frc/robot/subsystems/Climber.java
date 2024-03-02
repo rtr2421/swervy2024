@@ -17,7 +17,7 @@ import frc.robot.Constants.DigitalInputs;
 import frc.robot.Constants.MotorPorts;
 
 public class Climber extends SubsystemBase {
-  private static final double climberSpeed = -0.8;
+  private static final double climberSpeed = -1.0;
   private boolean goingUpwards;
   public enum ClimberStateEnum {goingUp, goingDown, nothing};
   ClimberStateEnum climberstate = ClimberStateEnum.nothing;

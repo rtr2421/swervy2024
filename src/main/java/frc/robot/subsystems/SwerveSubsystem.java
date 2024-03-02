@@ -151,6 +151,7 @@ public class SwerveSubsystem extends SubsystemBase {
         rotation,
         fieldRelative,
         false); // Open loop is disabled since it shouldn't be used most of the time.
+    SmartDashboard.putBoolean("FieldRelative", fieldRelative);
   }
 
   /**

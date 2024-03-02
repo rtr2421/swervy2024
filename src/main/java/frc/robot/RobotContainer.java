@@ -125,7 +125,7 @@ public class RobotContainer {
     // cancelling on release.
 
     driverXbox.a().toggleOnTrue(new RunIntake(indexer, intake));
-    driverXbox.start().onTrue(new InstantCommand(() -> {driveMode = !driveMode; SmartDashboard.putBoolean("Drive Mode", driveMode);}));
+    driverXbox.start().onTrue(new InstantCommand(() -> {driveMode = !driveMode;}));
     driverXbox.x().whileTrue(new ShootNote(shooter, indexer, true))
         .onFalse(new InstantCommand(()-> {shooter.stop(); indexer.stop();}));
    driverXbox.b().whileTrue(new ShootNote(shooter, indexer, false))

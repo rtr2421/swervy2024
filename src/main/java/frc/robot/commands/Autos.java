@@ -28,7 +28,8 @@ public final class Autos {
    * @return
    */
   public static Command driveForward(SwerveSubsystem swerveSubsystem) {
-    return new DriveDistance(swerveSubsystem, 2);
+    // return new DriveDistance(swerveSubsystem, 2);
+    return new PathPlannerAuto("sean1");
   }
   /**
    * Creates an autonomous command where we:

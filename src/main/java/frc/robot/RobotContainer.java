@@ -59,7 +59,8 @@ public class RobotContainer {
   private final CommandXboxController driverXbox = new CommandXboxController(OperatorConstants.kDriverControllerPort);
   private SendableChooser<Command> autonomousChooser = new SendableChooser<>();
 
- private final Field2d field;
+  private final Field2d field;
+
   /**
    * The container for the robot. Contains subsystems, OI devices, and commands.
    */
@@ -68,9 +69,8 @@ public class RobotContainer {
     configureBindings();
     configureAutos();
     field = new Field2d();
-        SmartDashboard.putData("Field", field);
+    SmartDashboard.putData("Field", field);
 
-    
     TeleopDrive teleopDrive = new TeleopDrive(drive,
         () -> -MathUtil.applyDeadband(driverXbox.getLeftY(),
             OperatorConstants.LEFT_Y_DEADBAND),
@@ -81,25 +81,25 @@ public class RobotContainer {
 
     drive.setDefaultCommand(teleopDrive);
 
-         // Logging callback for current robot pose
-        PathPlannerLogging.setLogCurrentPoseCallback((pose) -> {
-            // Do whatever you want with the pose here
-            field.setRobotPose(pose);
-            SmartDashboard.putNumber("CurrentX", pose.getX());
-        });
+    // Logging callback for current robot pose
+    PathPlannerLogging.setLogCurrentPoseCallback((pose) -> {
+      // Do whatever you want with the pose here
+      field.setRobotPose(pose);
+      SmartDashboard.putNumber("CurrentX", pose.getX());
+    });
 
-        // Logging callback for target robot pose
-        PathPlannerLogging.setLogTargetPoseCallback((pose) -> {
-            // Do whatever you want with the pose here
-            field.getObject("target pose").setPose(pose);
-            SmartDashboard.putNumber("TargetX", pose.getX());
-        });
+    // Logging callback for target robot pose
+    PathPlannerLogging.setLogTargetPoseCallback((pose) -> {
+      // Do whatever you want with the pose here
+      field.getObject("target pose").setPose(pose);
+      SmartDashboard.putNumber("TargetX", pose.getX());
+    });
 
-        // Logging callback for the active path, this is sent as a list of poses
-        PathPlannerLogging.setLogActivePathCallback((poses) -> {
-            // Do whatever you want with the poses here
-            field.getObject("path").setPoses(poses);
-        });
+    // Logging callback for the active path, this is sent as a list of poses
+    PathPlannerLogging.setLogActivePathCallback((poses) -> {
+      // Do whatever you want with the poses here
+      field.getObject("path").setPoses(poses);
+    });
   }
 
   /**
@@ -118,33 +118,45 @@ public class RobotContainer {
    */
   private void configureBindings() {
     // Schedule `ExampleCommand` when `exampleCondition` changes to `true`
-    
 
     // Schedule `exampleMethodCommand` when the Xbox controller's B button is
     // pressed,
     // cancelling on release.
 
     driverXbox.a().toggleOnTrue(new RunIntake(indexer, intake));
-    driverXbox.start().onTrue(new InstantCommand(() -> {driveMode = !driveMode;}));
-    driverXbox.x().whileTrue(new ShootNote(shooter, indexer, true))
-        .onFalse(new InstantCommand(()-> {shooter.stop(); indexer.stop();}));
-   driverXbox.b().whileTrue(new ShootNote(shooter, indexer, false))
-        .onFalse(new InstantCommand(()-> {shooter.stop(); indexer.stop();}));
+    driverXbox.start().onTrue(new InstantCommand(() -> {
+      driveMode = !driveMode;
+    }));
+    driverXbox.x().onTrue(new ShootNote(shooter, indexer, true)
+        .andThen(new InstantCommand(() -> {
+          shooter.stop();
+          indexer.stop();
+        })));
+    driverXbox.b().onTrue(new ShootNote(shooter, indexer, false)
+        .andThen(new InstantCommand(() -> {
+          shooter.stop();
+          indexer.stop();
+        })));
 
-    driverXbox.povDown().whileTrue(new StartEndCommand(() -> climber.retract(),() -> climber.stop(), climber));
-    driverXbox.povUp().whileTrue(new StartEndCommand(() -> climber.extend(),() -> climber.stop(), climber));
+    driverXbox.povDown().whileTrue(new StartEndCommand(() -> climber.retract(), () -> climber.stop(), climber));
+    driverXbox.povUp().whileTrue(new StartEndCommand(() -> climber.extend(), () -> climber.stop(), climber));
 
-    
     // driverXbox.y().toggleOnTrue(new RunClimber(climber));
 
-    
     driverXbox
         .y()
-        .whileTrue(new InstantCommand(() -> { indexer.reverse(); intake.reverse(); }, intake))
-        .onFalse(new InstantCommand(()-> { indexer.stop(); intake.stop(); }, intake)); 
-    
-    SmartDashboard.putData("Reset Pose", new InstantCommand(()-> resetPoseAngle()));
-    SmartDashboard.putData("Override Climber Safety", new StartEndCommand(() -> climber.setSafety(false), () -> climber.setSafety(true)));
+        .whileTrue(new InstantCommand(() -> {
+          indexer.reverse();
+          intake.reverse();
+        }, intake))
+        .onFalse(new InstantCommand(() -> {
+          indexer.stop();
+          intake.stop();
+        }, intake));
+
+    SmartDashboard.putData("Reset Pose", new InstantCommand(() -> resetPoseAngle()));
+    SmartDashboard.putData("Override Climber Safety",
+        new StartEndCommand(() -> climber.setSafety(false), () -> climber.setSafety(true)));
   }
 
   /**
@@ -158,26 +170,29 @@ public class RobotContainer {
   }
 
   private void configureAutos() {
-    NamedCommands.registerCommand("shoot", new ShootNote(shooter, indexer, true).withTimeout(2)
-      .andThen(new InstantCommand(()-> {shooter.stop(); indexer.stop();})));
-    // TODO: Change timeout on above line
+    NamedCommands.registerCommand("shoot", new ShootNote(shooter, indexer, true)
+        .andThen(new InstantCommand(() -> {
+          shooter.stop();
+          indexer.stop();
+        })));
     NamedCommands.registerCommand("RunIntake", new RunIntake(indexer, intake));
-    
+
     autonomousChooser.setDefaultOption("Drive forward", Autos.driveForward(drive));
     autonomousChooser.addOption("Right 1 shot", Autos.simpleAutoRight());
     autonomousChooser.addOption("Left 1 shot", Autos.simpleAutoLeft());
     autonomousChooser.addOption("Centered 2 shot auto", Autos.shoot2HighShots());
     autonomousChooser.addOption("Centered 2 shot + center far Hoop", Autos.centerFarHoop());
     autonomousChooser.addOption("Left side Shoot 3 Shots", Autos.leftShoot3Shots());
-    
-    autonomousChooser.addOption("Centered Shoot 2 Non path planner", Autos.shoot2Pieces(drive, shooter, intake, indexer));
+
+    autonomousChooser.addOption("Centered Shoot 2 Non path planner",
+        Autos.shoot2Pieces(drive, shooter, intake, indexer));
     SmartDashboard.putData("auto choices", autonomousChooser);
   }
 
-private void resetPoseAngle(){
-  var currentPose = drive.getPose();
-  var newPose = new Pose2d(currentPose.getTranslation(), new Rotation2d(0));
-  drive.resetOdometry(newPose);
-}
+  private void resetPoseAngle() {
+    var currentPose = drive.getPose();
+    var newPose = new Pose2d(currentPose.getTranslation(), new Rotation2d(0));
+    drive.resetOdometry(newPose);
+  }
 
 }

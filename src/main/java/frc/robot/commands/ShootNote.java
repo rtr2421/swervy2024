@@ -4,6 +4,8 @@
 
 package frc.robot.commands;
 
+import java.time.Instant;
+
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.RunCommand;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
@@ -23,13 +25,15 @@ public class ShootNote extends SequentialCommandGroup {
       addCommands(new InstantCommand(()-> shooter.highShot())
         .andThen(new WaitUntilCommand(shooter::atSpeed))
         .andThen(new WaitCommand(1.5))
-        .andThen(new RunCommand(()-> indexer.start())));
+        .andThen(new InstantCommand(()-> indexer.start()))
+        .andThen(new WaitCommand(0.7)));
   
       } else { 
         addCommands(new InstantCommand(()-> shooter.lowShot())
         .andThen(new WaitUntilCommand(shooter::atSpeed))
         .andThen(new WaitCommand(0.5))
-        .andThen(new RunCommand(()-> indexer.start())));
+        .andThen(new InstantCommand(()-> indexer.start()))
+        .andThen(new WaitCommand(0.7)));
       }
 
     

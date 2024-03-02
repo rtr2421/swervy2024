@@ -59,6 +59,7 @@ public class Shooter extends SubsystemBase {
    */
   public void lowShot() {
     flap.set(DoubleSolenoid.Value.kForward);
+    shooterMotor.set(0.5);
     //shooterPid.setReference(lowReference, CANSparkMax.ControlType.kSmartVelocity);
     shootHigh = false;
   }

@@ -126,11 +126,9 @@ public class RobotContainer {
 
     driverXbox.a().toggleOnTrue(new RunIntake(indexer, intake));
     driverXbox.start().onTrue(new InstantCommand(() -> {driveMode = !driveMode; SmartDashboard.putBoolean("Drive Mode", driveMode);}));
-    driverXbox.b().whileTrue(new InstantCommand(()-> shooter.lowShot())
-        .andThen(new WaitUntilCommand(shooter::atSpeed))
-        .andThen(new RunCommand(()-> indexer.start())))
-        .onFalse(new InstantCommand(()-> {shooter.stop(); indexer.stop();}));
     driverXbox.x().whileTrue(new ShootNote(shooter, indexer, true))
+        .onFalse(new InstantCommand(()-> {shooter.stop(); indexer.stop();}));
+   driverXbox.b().whileTrue(new ShootNote(shooter, indexer, false))
         .onFalse(new InstantCommand(()-> {shooter.stop(); indexer.stop();}));
 
     driverXbox.povDown().whileTrue(new StartEndCommand(() -> climber.retract(),() -> climber.stop(), climber));
@@ -141,7 +139,7 @@ public class RobotContainer {
 
     
     driverXbox
-        .leftBumper()
+        .y()
         .whileTrue(new InstantCommand(() -> { indexer.reverse(); intake.reverse(); }, intake))
         .onFalse(new InstantCommand(()-> { indexer.stop(); intake.stop(); }, intake)); 
     

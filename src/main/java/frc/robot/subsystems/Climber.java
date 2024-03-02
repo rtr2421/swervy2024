@@ -16,7 +16,7 @@ import frc.robot.Constants.DigitalInputs;
 import frc.robot.Constants.MotorPorts;
 
 public class Climber extends SubsystemBase {
-  private static final double climberSpeed = 0.5;
+  private static final double climberSpeed = -0.8;
   private boolean goingUpwards;
   public enum ClimberStateEnum {goingUp, goingDown, nothing};
   ClimberStateEnum climberstate = ClimberStateEnum.nothing;
@@ -30,8 +30,8 @@ public class Climber extends SubsystemBase {
   public Climber() {
     climberMotor.enableSoftLimit(CANSparkMax.SoftLimitDirection.kForward, true);
     climberMotor.enableSoftLimit(CANSparkMax.SoftLimitDirection.kReverse, true);
-    climberMotor.setSoftLimit(CANSparkMax.SoftLimitDirection.kForward, 15);
-    climberMotor.setSoftLimit(CANSparkMax.SoftLimitDirection.kReverse, 0);
+    climberMotor.setSoftLimit(CANSparkMax.SoftLimitDirection.kForward, 0);
+    climberMotor.setSoftLimit(CANSparkMax.SoftLimitDirection.kReverse, -500);
 
     climberMotor.getEncoder().setPosition(0);
   }

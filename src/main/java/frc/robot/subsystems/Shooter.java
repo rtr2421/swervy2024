@@ -8,6 +8,7 @@ import com.revrobotics.CANSparkLowLevel.MotorType;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.RelativeEncoder;
 import com.revrobotics.SparkPIDController;
+import com.revrobotics.CANSparkBase.IdleMode;
 import com.revrobotics.SparkRelativeEncoder.Type;
 
 import edu.wpi.first.wpilibj.DoubleSolenoid;
@@ -46,7 +47,7 @@ public class Shooter extends SubsystemBase {
     shooterPid.setIZone(kIz);
     shooterPid.setFF(kFF);
     shooterPid.setOutputRange(kMinOutput, kMaxOutput);
-    
+    shooterMotor.setIdleMode(IdleMode.kCoast);
   }
 
   @Override

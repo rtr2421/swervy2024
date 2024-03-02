@@ -5,6 +5,7 @@
 package frc.robot.subsystems;
 
 import com.revrobotics.CANSparkBase;
+import com.revrobotics.CANSparkBase.IdleMode;
 import com.revrobotics.CANSparkLowLevel.MotorType;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.REVLibError;
@@ -34,6 +35,7 @@ public class Climber extends SubsystemBase {
     climberMotor.setSoftLimit(CANSparkMax.SoftLimitDirection.kReverse, -500);
 
     climberMotor.getEncoder().setPosition(0);
+    climberMotor.setIdleMode(IdleMode.kBrake);
   }
   
   @Override

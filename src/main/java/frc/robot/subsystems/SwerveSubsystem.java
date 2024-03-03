@@ -146,7 +146,7 @@ public class SwerveSubsystem extends SubsystemBase {
    * @param fieldRelative Drive mode. True for field-relative, false for
    *                      robot-relative.
    */
-  public void drive(Translation2d translation, double rotatin, boolean fieldRelative) {
+  public void drive(Translation2d translation, double rotation, boolean fieldRelative) {
     swerveDrive.drive(translation,
         rotation,
         fieldRelative,

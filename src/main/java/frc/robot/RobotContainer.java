@@ -5,6 +5,7 @@
 package frc.robot;
 
 import frc.robot.Constants.OperatorConstants;
+import frc.robot.commands.AbsoluteDrive;
 import frc.robot.commands.Autos;
 import frc.robot.commands.RunClimber;
 import frc.robot.commands.RunIntake;
@@ -79,7 +80,15 @@ public class RobotContainer {
         () -> -driverXbox.getRightX(),
         () -> driveMode);
 
-    drive.setDefaultCommand(teleopDrive);
+    AbsoluteDrive closedAbsoluteDrive = new AbsoluteDrive(drive,
+        () -> -MathUtil.applyDeadband(driverXbox.getLeftY(), OperatorConstants.LEFT_Y_DEADBAND),
+        () -> -MathUtil.applyDeadband(driverXbox.getLeftX(), OperatorConstants.LEFT_X_DEADBAND),
+        () -> -MathUtil.applyDeadband(driverXbox.getRightX(), OperatorConstants.RIGHT_X_DEADBAND),
+        driverXbox.getHID()::getPOV);
+
+
+    //drive.setDefaultCommand(teleopDrive);
+    drive.setDefaultCommand(closedAbsoluteDrive);
 
     // Logging callback for current robot pose
     PathPlannerLogging.setLogCurrentPoseCallback((pose) -> {
@@ -138,8 +147,8 @@ public class RobotContainer {
           indexer.stop();
         })));
 
-    driverXbox.povDown().whileTrue(new StartEndCommand(() -> climber.retract(), () -> climber.stop(), climber));
-    driverXbox.povUp().whileTrue(new StartEndCommand(() -> climber.extend(), () -> climber.stop(), climber));
+    driverXbox.leftBumper().whileTrue(new StartEndCommand(() -> climber.retract(), () -> climber.stop(), climber));
+    driverXbox.rightBumper().whileTrue(new StartEndCommand(() -> climber.extend(), () -> climber.stop(), climber));
 
     // driverXbox.y().toggleOnTrue(new RunClimber(climber));
 

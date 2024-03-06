@@ -91,21 +91,20 @@ public class AbsoluteDrive extends Command {
 
     int povDir = povButtonSupplier.getAsInt();
 
-    // These are written to allow combinations for 45 angles
     // Face Away from Drivers
-    if (povDir == 0) {
+    if (povDir == 0 || povDir == 45 || povDir == 315) {
       headingY = -1;
     }
     // Face Right
-    if (povDir == 90) {
+    if (povDir == 90 || povDir == 45 || povDir == 135) {
       headingX = 1;
     }
     // Face Left
-    if (povDir == 270) {
+    if (povDir == 270 || povDir == 225 || povDir == 315) {
       headingX = -1;
     }
     // Face Towards the Drivers
-    if (povDir == 180) {
+    if (povDir == 180 || povDir == 135 || povDir == 225) {
       headingY = 1;
     }
 

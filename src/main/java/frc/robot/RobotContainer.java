@@ -55,13 +55,14 @@ public class RobotContainer {
   private final Shooter shooter = new Shooter();
   private final Indexer indexer = new Indexer();
   private final Climber climber = new Climber();
-  private Boolean driveMode = true;
+  private Boolean fieldOriented = true;
   // Replace with CommandPS4Controller or CommandJoystick if needed
   private final CommandXboxController driverXbox = new CommandXboxController(OperatorConstants.kDriverControllerPort);
   private SendableChooser<Command> autonomousChooser = new SendableChooser<>();
 
   private final Field2d field;
-
+  private final AbsoluteDrive closedAbsoluteDrive;
+  private final TeleopDrive teleopDrive;
   /**
    * The container for the robot. Contains subsystems, OI devices, and commands.
    */
@@ -72,23 +73,28 @@ public class RobotContainer {
     field = new Field2d();
     SmartDashboard.putData("Field", field);
 
-    TeleopDrive teleopDrive = new TeleopDrive(drive,
+    // Will be used for robot oriented driving
+    teleopDrive = new TeleopDrive(drive,
         () -> -MathUtil.applyDeadband(driverXbox.getLeftY(),
             OperatorConstants.LEFT_Y_DEADBAND),
         () -> -MathUtil.applyDeadband(driverXbox.getLeftX(),
             OperatorConstants.LEFT_X_DEADBAND),
         () -> -driverXbox.getRightX(),
-        () -> driveMode);
+        () -> false);
 
-    AbsoluteDrive closedAbsoluteDrive = new AbsoluteDrive(drive,
+    // For field oriented driving
+    closedAbsoluteDrive = new AbsoluteDrive(drive,
         () -> -MathUtil.applyDeadband(driverXbox.getLeftY(), OperatorConstants.LEFT_Y_DEADBAND),
         () -> -MathUtil.applyDeadband(driverXbox.getLeftX(), OperatorConstants.LEFT_X_DEADBAND),
         () -> -MathUtil.applyDeadband(driverXbox.getRightX(), OperatorConstants.RIGHT_X_DEADBAND),
         driverXbox.getHID()::getPOV);
 
 
-    //drive.setDefaultCommand(teleopDrive);
-    drive.setDefaultCommand(closedAbsoluteDrive);
+    if (fieldOriented) {
+      drive.setDefaultCommand(closedAbsoluteDrive);
+    } else {
+      drive.setDefaultCommand(teleopDrive);
+    }
 
     // Logging callback for current robot pose
     PathPlannerLogging.setLogCurrentPoseCallback((pose) -> {
@@ -133,9 +139,7 @@ public class RobotContainer {
     // cancelling on release.
 
     driverXbox.a().toggleOnTrue(new RunIntake(indexer, intake));
-    driverXbox.start().onTrue(new InstantCommand(() -> {
-      driveMode = !driveMode;
-    }));
+    driverXbox.start().onTrue(new InstantCommand(() -> switchDriveMode()));
     driverXbox.x().onTrue(new ShootNote(shooter, indexer, true)
         .andThen(new InstantCommand(() -> {
           shooter.stop();
@@ -202,6 +206,15 @@ public class RobotContainer {
     var currentPose = drive.getPose();
     var newPose = new Pose2d(currentPose.getTranslation(), new Rotation2d(0));
     drive.resetOdometry(newPose);
+  }
+
+  private void switchDriveMode() {
+    fieldOriented = ! fieldOriented;
+    if (fieldOriented) {
+      drive.setDefaultCommand(closedAbsoluteDrive);
+    } else {
+      drive.setDefaultCommand(teleopDrive);
+    }
   }
 
 }

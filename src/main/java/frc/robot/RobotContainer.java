@@ -175,10 +175,11 @@ public class RobotContainer {
           shooter.stop();
           indexer.stop();
         })));
-    //NamedCommands.registerCommand("RunIntake", new RunIntake(indexer, intake));
+    NamedCommands.registerCommand("RunIntake", new RunIntake(indexer, intake));
 
     autonomousChooser.setDefaultOption("Drive forward", Autos.driveForward(drive));
     autonomousChooser.addOption("Right 1 shot", Autos.simpleAutoRight());
+    autonomousChooser.addOption("Right 3 shot", Autos.rightShoot3Shots());
     autonomousChooser.addOption("Left 1 shot", Autos.simpleAutoLeft());
     autonomousChooser.addOption("Centered 2 shot auto", Autos.shoot2HighShots());
     autonomousChooser.addOption("Centered 2 shot + center far Hoop", Autos.centerFarHoop());

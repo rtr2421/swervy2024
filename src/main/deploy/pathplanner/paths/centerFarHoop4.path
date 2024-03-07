@@ -8,8 +8,8 @@
       },
       "prevControl": null,
       "nextControl": {
-        "x": 7.273695316621405,
-        "y": 3.788906039350541
+        "x": 7.275575330450057,
+        "y": 3.7896291215923306
       },
       "isLocked": false,
       "linkedName": "centerFarHoop1"
@@ -61,7 +61,7 @@
   "reversed": false,
   "folder": "centerFarHoop",
   "previewStartingState": {
-    "rotation": 0,
+    "rotation": -0.30314944371412683,
     "velocity": 0
   },
   "useDefaultConstraints": true

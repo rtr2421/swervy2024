@@ -10,6 +10,7 @@ import frc.robot.subsystems.Intake;
 import frc.robot.subsystems.Shooter;
 import frc.robot.subsystems.SwerveSubsystem;
 
+import com.pathplanner.lib.auto.AutoBuilder;
 import com.pathplanner.lib.commands.PathPlannerAuto;
 
 import edu.wpi.first.math.geometry.Translation2d;
@@ -29,7 +30,8 @@ public final class Autos {
    */
   public static Command driveForward(SwerveSubsystem swerveSubsystem) {
     // return new DriveDistance(swerveSubsystem, 2);
-    return new PathPlannerAuto("sean1");
+    //return new PathPlannerAuto("sean1");
+    return new PathPlannerAuto("sean");
   }
   /**
    * Creates an autonomous command where we:

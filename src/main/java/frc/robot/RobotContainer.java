@@ -153,6 +153,7 @@ public class RobotContainer {
           indexer.stop();
         })));
 
+    driverXbox.getHID().setRumble(RumbleType.kLeftRumble, 0);
     driverXbox.povDown().whileTrue(new StartEndCommand(() -> climber.retract(), () -> climber.stop(), climber));
     driverXbox.povUp().whileTrue(new StartEndCommand(() -> climber.extend(), () -> climber.stop(), climber));
 

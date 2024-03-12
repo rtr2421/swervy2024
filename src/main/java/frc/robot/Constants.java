@@ -40,7 +40,8 @@ public final class Constants {
     public static final int upperIntake = 13;
     public static final int motorLower = 14;
     public static final int motorIndexer = 15;
-    public static final int motorShooter = 16;
+    public static final int motorShooter1 = 16;
+    public static final int motorShooter2 = 18;
     public static final int motorClimber = 17;
     
   }

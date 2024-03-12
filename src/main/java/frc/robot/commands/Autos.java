@@ -76,6 +76,17 @@ public final class Autos {
     return new PathPlannerAuto("simpleAutoLeft");
   }
 
+  public static Command disruptCenterRight() {
+    return new PathPlannerAuto("disruptCenterRight");
+  }
+
+  public static Command rightShoot3Shots() {
+    return new PathPlannerAuto("rightShoot3Shots");
+  }
+
+
+
+
 
 
 

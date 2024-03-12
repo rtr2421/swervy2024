@@ -179,10 +179,12 @@ public class RobotContainer {
 
     autonomousChooser.setDefaultOption("Drive forward", Autos.driveForward(drive));
     autonomousChooser.addOption("Right 1 shot", Autos.simpleAutoRight());
+    autonomousChooser.addOption("Right 3 shot", Autos.rightShoot3Shots());
     autonomousChooser.addOption("Left 1 shot", Autos.simpleAutoLeft());
     autonomousChooser.addOption("Centered 2 shot auto", Autos.shoot2HighShots());
     autonomousChooser.addOption("Centered 2 shot + center far Hoop", Autos.centerFarHoop());
     autonomousChooser.addOption("Left side Shoot 3 Shots", Autos.leftShoot3Shots());
+    autonomousChooser.addOption("Disrupt Center From Right", Autos.disruptCenterRight());
 
     autonomousChooser.addOption("Centered Shoot 2 Non path planner",
         Autos.shoot2Pieces(drive, shooter, intake, indexer));

@@ -11,18 +11,25 @@ import com.revrobotics.SparkPIDController;
 import com.revrobotics.CANSparkBase.IdleMode;
 import com.revrobotics.SparkRelativeEncoder.Type;
 
+import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.PneumaticsModuleType;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import frc.robot.Constants.MotorPorts;
+import frc.robot.Constants.CANIDs;
 import frc.robot.Constants.PneumaticPorts;
 
 public class Shooter extends SubsystemBase {
 
-  private final CANSparkMax shooterMotor = new CANSparkMax(MotorPorts.motorShooter, MotorType.kBrushless);
-  private final DoubleSolenoid flap = new DoubleSolenoid(PneumaticsModuleType.REVPH, PneumaticPorts.flapForward,
-      PneumaticPorts.flapReverse);
+  private final CANSparkMax shooterMotor = new CANSparkMax(CANIDs.motorShooter, MotorType.kBrushless);
+  
+  private final DoubleSolenoid flap = new DoubleSolenoid(
+    CANIDs.REVPHCompressor, 
+    PneumaticsModuleType.REVPH, 
+    PneumaticPorts.tongueForward, 
+    PneumaticPorts.tongueReverse);
+
+  private final Compressor tongueCompressor = new Compressor(CANIDs.REVPHCompressor, PneumaticsModuleType.REVPH);
   private final RelativeEncoder shooterEncoder = shooterMotor.getEncoder();
   private SparkPIDController shooterPid = shooterMotor.getPIDController();
   private double lowReference = 700;
@@ -48,7 +55,10 @@ public class Shooter extends SubsystemBase {
     shooterPid.setFF(kFF);
     shooterPid.setOutputRange(kMinOutput, kMaxOutput);
     shooterMotor.setIdleMode(IdleMode.kCoast);
+
+    tongueCompressor.enableDigital();
   }
+
 
   @Override
   public void periodic() {
@@ -62,7 +72,7 @@ public class Shooter extends SubsystemBase {
     flap.set(DoubleSolenoid.Value.kForward);
     shooterMotor.set(-0.5);
     //shooterPid.setReference(lowReference, CANSparkMax.ControlType.kSmartVelocity);
-    shootHigh = false;
+    // shootHigh = false;
   }
 
   /**
@@ -72,7 +82,7 @@ public class Shooter extends SubsystemBase {
     //shooterPid.setReference(highReference, CANSparkMax.ControlType.kSmartVelocity);
     shooterMotor.set(-1);
     flap.set(DoubleSolenoid.Value.kReverse);
-    shootHigh = true;
+    // shootHigh = true;
   }
 
   /**

@@ -88,6 +88,14 @@ public class Shooter extends SubsystemBase {
     shootHigh = true;
   }
 
+  public void extendTongue() {
+    flap.set(DoubleSolenoid.Value.kForward);
+  }
+
+  public void retractTongue() {
+    flap.set(DoubleSolenoid.Value.kReverse);
+  }
+
   /**
    * stops all of the motors
    */

@@ -13,6 +13,8 @@ import edu.wpi.first.math.MathUtil;
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.wpilibj.Filesystem;
+import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.GenericHID.RumbleType;
 import edu.wpi.first.wpilibj.smartdashboard.Field2d;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
@@ -22,6 +24,7 @@ import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.StartEndCommand;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
+import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 import frc.robot.Constants.OperatorConstants;
 import frc.robot.commands.Autos;
@@ -54,6 +57,7 @@ public class RobotContainer {
   private Boolean driveMode = true;
   // Replace with CommandPS4Controller or CommandJoystick if needed
   private final CommandXboxController driverXbox = new CommandXboxController(OperatorConstants.kDriverControllerPort);
+  private final Joystick driverJoystick = new Joystick(OperatorConstants.kJoystickControllerPort);
   private SendableChooser<Command> autonomousChooser = new SendableChooser<>();
 
   private final Field2d field;
@@ -67,16 +71,18 @@ public class RobotContainer {
     configureAutos();
     field = new Field2d();
     SmartDashboard.putData("Field", field);
-
+    
     TeleopDrive teleopDrive = new TeleopDrive(drive,
-        () -> -MathUtil.applyDeadband(driverXbox.getLeftY(),
+        () -> -MathUtil.applyDeadband(driverJoystick.getY(),
             OperatorConstants.LEFT_Y_DEADBAND),
-        () -> -MathUtil.applyDeadband(driverXbox.getLeftX(),
+        () -> -MathUtil.applyDeadband(driverJoystick.getX(),
             OperatorConstants.LEFT_X_DEADBAND),
-        () -> -driverXbox.getRightX(),
+        () -> -driverJoystick.getTwist(),
         () -> driveMode);
 
     drive.setDefaultCommand(teleopDrive);
+
+    
 
     // Logging callback for current robot pose
     PathPlannerLogging.setLogCurrentPoseCallback((pose) -> {
@@ -119,6 +125,12 @@ public class RobotContainer {
     // Schedule `exampleMethodCommand` when the Xbox controller's B button is
     // pressed,
     // cancelling on release.
+    JoystickButton trigger = new JoystickButton(driverJoystick, 1);
+    JoystickButton centerButton = new JoystickButton(driverJoystick, 2);
+    JoystickButton leftButton = new JoystickButton(driverJoystick, 3);
+    JoystickButton rightButton = new JoystickButton(driverJoystick, 4);
+    JoystickButton highLeftButton = new JoystickButton(driverJoystick, 5);
+    JoystickButton highRightButton = new JoystickButton(driverJoystick, 6);
 
     SmartDashboard.putNumber("ShooterSpeed1", 1000);
     SmartDashboard.putNumber("ShooterSpeed2", 1000);
@@ -130,35 +142,37 @@ public class RobotContainer {
     SmartDashboard.putData("SetShooterP", new InstantCommand(
       () -> shooter.setP(SmartDashboard.getNumber("ShooterP", 0.001))));
     
-    driverXbox.a().toggleOnTrue(
+    // driverXbox.a().toggleOnTrue(
+
+    trigger.toggleOnTrue(
     new RunIntake(indexer, intake)
     .andThen(new InstantCommand (()-> driverXbox.getHID().setRumble(RumbleType.kBothRumble, 1)))
-    .andThen(new WaitCommand(5))
+    .andThen(new WaitCommand(2))
     .andThen(new InstantCommand (()->driverXbox.getHID().setRumble(RumbleType.kBothRumble, 0))));
     
 
-    driverXbox.start().onTrue(new InstantCommand(() -> {
+    centerButton.onTrue(new InstantCommand(() -> {
       driveMode = !driveMode;
     }));
 
-    driverXbox.x().onTrue(new ShootNote(shooter, indexer, true)
+    rightButton.onTrue(new ShootNote(shooter, indexer, true)
         .andThen(new InstantCommand(() -> {
           shooter.stop();
           indexer.stop();
         })));
-    driverXbox.b().onTrue(new ShootNote(shooter, indexer, false)
+    leftButton.onTrue(new ShootNote(shooter, indexer, false)
         .andThen(new InstantCommand(() -> {
           shooter.stop();
           indexer.stop();
         })));
 
-    driverXbox.povDown().whileTrue(new StartEndCommand(() -> climber.retract(), () -> climber.stop(), climber));
-    driverXbox.povUp().whileTrue(new StartEndCommand(() -> climber.extend(), () -> climber.stop(), climber));
+    highLeftButton.whileTrue(new StartEndCommand(() -> climber.retract(), () -> climber.stop(), climber));
+    highRightButton.whileTrue(new StartEndCommand(() -> climber.extend(), () -> climber.stop(), climber));
 
     // driverXbox.y().toggleOnTrue(new RunClimber(climber));
 
     driverXbox
-        .y()
+        .a()
         .whileTrue(new InstantCommand(() -> {
           indexer.reverse();
           intake.reverse();

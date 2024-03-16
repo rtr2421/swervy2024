@@ -31,7 +31,8 @@ public class ShootNote extends SequentialCommandGroup {
   
       } else { 
         addCommands(new InstantCommand(()-> shooter.lowShot())
-        .andThen(new WaitUntilCommand(shooter::atSpeed))
+        // .andThen(new WaitUntilCommand(shooter::atSpeed))
+        .andThen(new WaitCommand(0.5))
         .andThen(new InstantCommand(()-> indexer.startShooting()))
         .andThen(new WaitCommand(0.7))
         .andThen(new InstantCommand(() -> shooter.retractTongue()))

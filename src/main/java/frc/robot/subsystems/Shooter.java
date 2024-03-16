@@ -21,8 +21,8 @@ import frc.robot.Constants.PneumaticPorts;
 
 public class Shooter extends SubsystemBase {
 
-  private final CANSparkMax shooterMotor1 = new CANSparkMax(MotorPorts.motorShooter1, MotorType.kBrushless);
-  private final CANSparkMax shooterMotor2 = new CANSparkMax(MotorPorts.motorShooter2, MotorType.kBrushless);
+  private final CANSparkMax shooterMotor1 = new CANSparkMax(CANIDs.motorShooter1, MotorType.kBrushless);
+  private final CANSparkMax shooterMotor2 = new CANSparkMax(CANIDs.motorShooter2, MotorType.kBrushless);
   private final DoubleSolenoid flap = new DoubleSolenoid(
     CANIDs.REVPHCompressor, 
     PneumaticsModuleType.REVPH, 

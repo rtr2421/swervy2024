@@ -28,11 +28,11 @@ public final class Constants {
   }
   public static class PneumaticPorts{
 
-    public static final int flapForward = 0;
-    public static final int flapReverse = 1;
+    public static final int tongueForward = 0;
+    public static final int tongueReverse = 1;
 
   }
-  public static class MotorPorts{
+  public static class CANIDs{
     /**
      * 1-12 on drive train
      */
@@ -43,6 +43,9 @@ public final class Constants {
     public static final int motorShooter1 = 16;
     public static final int motorShooter2 = 18;
     public static final int motorClimber = 17;
+    
+    public static final int REVPHCompressor = 19;
+
     
   }
 

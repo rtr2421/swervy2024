@@ -11,23 +11,30 @@ import com.revrobotics.SparkPIDController;
 import com.revrobotics.CANSparkBase.IdleMode;
 import com.revrobotics.SparkRelativeEncoder.Type;
 
+import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.PneumaticsModuleType;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import frc.robot.Constants.MotorPorts;
+import frc.robot.Constants.CANIDs;
 import frc.robot.Constants.PneumaticPorts;
 
 public class Shooter extends SubsystemBase {
 
   private final CANSparkMax shooterMotor1 = new CANSparkMax(MotorPorts.motorShooter1, MotorType.kBrushless);
   private final CANSparkMax shooterMotor2 = new CANSparkMax(MotorPorts.motorShooter2, MotorType.kBrushless);
-  private final DoubleSolenoid flap = new DoubleSolenoid(PneumaticsModuleType.REVPH, PneumaticPorts.flapForward,
-      PneumaticPorts.flapReverse);
+  private final DoubleSolenoid flap = new DoubleSolenoid(
+    CANIDs.REVPHCompressor, 
+    PneumaticsModuleType.REVPH, 
+    PneumaticPorts.tongueForward, 
+    PneumaticPorts.tongueReverse);
+  
+   private final Compressor tongueCompressor = new Compressor(CANIDs.REVPHCompressor, PneumaticsModuleType.REVPH);
   private final RelativeEncoder shooterEncoder1 = shooterMotor1.getEncoder();
   private SparkPIDController shooterPid1 = shooterMotor1.getPIDController();
   private final RelativeEncoder shooterEncoder2 = shooterMotor2.getEncoder();
   private SparkPIDController shooterPid2 = shooterMotor2.getPIDController();
+
   private double lowReference = 700;
   private double highReference = 6000;
   private boolean shootHigh;
@@ -43,7 +50,6 @@ public class Shooter extends SubsystemBase {
 
   /** Creates a new Shooter. */
   public Shooter() {
-    // set PID coefficients
     shooterPid1.setP(kP);
     shooterPid1.setI(kI);
     shooterPid1.setD(kD);
@@ -58,7 +64,10 @@ public class Shooter extends SubsystemBase {
     shooterPid2.setFF(kFF);
     shooterPid2.setOutputRange(kMinOutput, kMaxOutput);
     shooterMotor2.setIdleMode(IdleMode.kCoast);
+    
+    tongueCompressor.enableDigital();
   }
+
 
   @Override
   public void periodic() {
@@ -74,7 +83,7 @@ public class Shooter extends SubsystemBase {
     shooterMotor1.set(-0.1);
     shooterMotor2.set(0.1);
     //shooterPid.setReference(lowReference, CANSparkMax.ControlType.kSmartVelocity);
-    shootHigh = false;
+    // shootHigh = false;
   }
 
   /**
@@ -85,7 +94,7 @@ public class Shooter extends SubsystemBase {
     shooterMotor1.set(-1);
     shooterMotor2.set(1);
     flap.set(DoubleSolenoid.Value.kReverse);
-    shootHigh = true;
+    // shootHigh = true;
   }
 
   public void extendTongue() {

@@ -14,14 +14,14 @@ import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants.DigitalInputs;
-import frc.robot.Constants.MotorPorts;
+import frc.robot.Constants.CANIDs;
 
 public class Climber extends SubsystemBase {
   private static final double climberSpeed = -1.0;
   private boolean goingUpwards;
   public enum ClimberStateEnum {goingUp, goingDown, nothing};
   ClimberStateEnum climberstate = ClimberStateEnum.nothing;
-  private final CANSparkMax climberMotor = new CANSparkMax(MotorPorts.motorClimber, MotorType.kBrushless); 
+  private final CANSparkMax climberMotor = new CANSparkMax(CANIDs.motorClimber, MotorType.kBrushless); 
   private final DigitalInput magnet1 = new DigitalInput(DigitalInputs.ClimberMagnet1);
   private final DigitalInput magnet2 = new DigitalInput(DigitalInputs.ClimberMagnet2);
 

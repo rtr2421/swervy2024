@@ -21,17 +21,20 @@ import frc.robot.Constants.PneumaticPorts;
 
 public class Shooter extends SubsystemBase {
 
-  private final CANSparkMax shooterMotor = new CANSparkMax(CANIDs.motorShooter, MotorType.kBrushless);
-  
+  private final CANSparkMax shooterMotor1 = new CANSparkMax(MotorPorts.motorShooter1, MotorType.kBrushless);
+  private final CANSparkMax shooterMotor2 = new CANSparkMax(MotorPorts.motorShooter2, MotorType.kBrushless);
   private final DoubleSolenoid flap = new DoubleSolenoid(
     CANIDs.REVPHCompressor, 
     PneumaticsModuleType.REVPH, 
     PneumaticPorts.tongueForward, 
     PneumaticPorts.tongueReverse);
+  
+   private final Compressor tongueCompressor = new Compressor(CANIDs.REVPHCompressor, PneumaticsModuleType.REVPH);
+  private final RelativeEncoder shooterEncoder1 = shooterMotor1.getEncoder();
+  private SparkPIDController shooterPid1 = shooterMotor1.getPIDController();
+  private final RelativeEncoder shooterEncoder2 = shooterMotor2.getEncoder();
+  private SparkPIDController shooterPid2 = shooterMotor2.getPIDController();
 
-  private final Compressor tongueCompressor = new Compressor(CANIDs.REVPHCompressor, PneumaticsModuleType.REVPH);
-  private final RelativeEncoder shooterEncoder = shooterMotor.getEncoder();
-  private SparkPIDController shooterPid = shooterMotor.getPIDController();
   private double lowReference = 700;
   private double highReference = 6000;
   private boolean shootHigh;
@@ -47,22 +50,29 @@ public class Shooter extends SubsystemBase {
 
   /** Creates a new Shooter. */
   public Shooter() {
-    // set PID coefficients
-    shooterPid.setP(kP);
-    shooterPid.setI(kI);
-    shooterPid.setD(kD);
-    shooterPid.setIZone(kIz);
-    shooterPid.setFF(kFF);
-    shooterPid.setOutputRange(kMinOutput, kMaxOutput);
-    shooterMotor.setIdleMode(IdleMode.kCoast);
-
+    shooterPid1.setP(kP);
+    shooterPid1.setI(kI);
+    shooterPid1.setD(kD);
+    shooterPid1.setIZone(kIz);
+    shooterPid1.setFF(kFF);
+    shooterPid1.setOutputRange(kMinOutput, kMaxOutput);
+    shooterMotor1.setIdleMode(IdleMode.kCoast);
+    shooterPid2.setP(kP);
+    shooterPid2.setI(kI);
+    shooterPid2.setD(kD);
+    shooterPid2.setIZone(kIz);
+    shooterPid2.setFF(kFF);
+    shooterPid2.setOutputRange(kMinOutput, kMaxOutput);
+    shooterMotor2.setIdleMode(IdleMode.kCoast);
+    
     tongueCompressor.enableDigital();
   }
 
 
   @Override
   public void periodic() {
-    SmartDashboard.putNumber("ShooterSpeed", shooterEncoder.getVelocity());
+    SmartDashboard.putNumber("MotorShooterSpeed1", shooterEncoder1.getVelocity());
+    SmartDashboard.putNumber("MotorShooterSpeed2", shooterEncoder2.getVelocity());
   }
 
   /**
@@ -70,7 +80,8 @@ public class Shooter extends SubsystemBase {
    */
   public void lowShot() {
     flap.set(DoubleSolenoid.Value.kForward);
-    shooterMotor.set(-0.5);
+    shooterMotor1.set(-0.1);
+    shooterMotor2.set(0.1);
     //shooterPid.setReference(lowReference, CANSparkMax.ControlType.kSmartVelocity);
     // shootHigh = false;
   }
@@ -80,16 +91,26 @@ public class Shooter extends SubsystemBase {
    */
   public void highShot() {
     //shooterPid.setReference(highReference, CANSparkMax.ControlType.kSmartVelocity);
-    shooterMotor.set(-1);
+    shooterMotor1.set(-1);
+    shooterMotor2.set(1);
     flap.set(DoubleSolenoid.Value.kReverse);
     // shootHigh = true;
   }
 
+  public void extendTongue() {
+    flap.set(DoubleSolenoid.Value.kForward);
+  }
+
+  public void retractTongue() {
+    flap.set(DoubleSolenoid.Value.kReverse);
+  }
+
   /**
-   * stops the index motor
+   * stops all of the motors
    */
   public void stop() {
-    shooterMotor.set(0);
+    shooterMotor1.set(0);
+    shooterMotor2.set(0);
     flap.set(DoubleSolenoid.Value.kReverse);
   }
 
@@ -100,9 +121,9 @@ public class Shooter extends SubsystemBase {
     return true;
     /* 
     if (shootHigh){
-      return (highReference - 20 < shooterEncoder.getVelocity() && shooterEncoder.getVelocity() < highReference + 20);
+      return (highReference - 20 < shooterEncoder1.getVelocity() && shooterEncoder1.getVelocity() < highReference + 20);
     } else {
-      return (lowReference - 20 < shooterEncoder.getVelocity() && shooterEncoder.getVelocity() < lowReference + 20);
+      return (lowReference - 20 < shooterEncoder1.getVelocity() && shooterEncoder1.getVelocity() < lowReference + 20);
     }*/
   }
 

@@ -4,6 +4,19 @@
       "window": {
         "visible": true
       }
+
+    },
+    "Other Devices": {
+      "SPARK MAX [17]": {
+        "header": {
+          "open": true
+        }
+      },
+      "Talon SRX[14]": {
+        "header": {
+          "open": true
+        }
+      }
     }
   },
   "NTProvider": {

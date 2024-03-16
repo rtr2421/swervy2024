@@ -6,6 +6,7 @@ package frc.robot.commands;
 
 import java.time.Instant;
 
+import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.RunCommand;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
@@ -33,7 +34,13 @@ public class ShootNote extends SequentialCommandGroup {
         .andThen(new WaitUntilCommand(shooter::atSpeed))
         .andThen(new WaitCommand(0.5))
         .andThen(new InstantCommand(()-> indexer.startShooting()))
-        .andThen(new WaitCommand(0.7)));
+        .andThen(new WaitCommand(0.7))
+        .andThen(new InstantCommand(() -> shooter.retractTongue()))
+        .andThen(new WaitCommand(0.3))
+        .andThen(new InstantCommand(() -> shooter.extendTongue()))
+        .andThen(new WaitCommand(0.3))
+        .andThen(new InstantCommand(() -> shooter.retractTongue()))
+        );
       }
 
     

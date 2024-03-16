@@ -4,19 +4,6 @@
 
 package frc.robot;
 
-import frc.robot.Constants.OperatorConstants;
-import frc.robot.commands.Autos;
-import frc.robot.commands.RunClimber;
-import frc.robot.commands.RunIntake;
-import frc.robot.commands.ShootNote;
-import frc.robot.commands.TeleopDrive;
-import frc.robot.subsystems.Climber;
-
-import frc.robot.subsystems.Indexer;
-import frc.robot.subsystems.Intake;
-import frc.robot.subsystems.Shooter;
-import frc.robot.subsystems.SwerveSubsystem;
-
 import java.io.File;
 
 import com.pathplanner.lib.auto.NamedCommands;
@@ -26,16 +13,26 @@ import edu.wpi.first.math.MathUtil;
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.wpilibj.Filesystem;
+import edu.wpi.first.wpilibj.GenericHID.RumbleType;
 import edu.wpi.first.wpilibj.smartdashboard.Field2d;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
-import edu.wpi.first.wpilibj2.command.RunCommand;
 import edu.wpi.first.wpilibj2.command.StartEndCommand;
-import edu.wpi.first.wpilibj2.command.WaitUntilCommand;
+import edu.wpi.first.wpilibj2.command.WaitCommand;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
+import frc.robot.Constants.OperatorConstants;
+import frc.robot.commands.Autos;
+import frc.robot.commands.RunIntake;
+import frc.robot.commands.ShootNote;
+import frc.robot.commands.TeleopDrive;
+import frc.robot.subsystems.Climber;
+import frc.robot.subsystems.Indexer;
+import frc.robot.subsystems.Intake;
+import frc.robot.subsystems.Shooter;
+import frc.robot.subsystems.SwerveSubsystem;
 
 /**
  * This class is where the bulk of the robot should be declared. Since
@@ -123,10 +120,17 @@ public class RobotContainer {
     // pressed,
     // cancelling on release.
 
-    driverXbox.a().toggleOnTrue(new RunIntake(indexer, intake));
+    driverXbox.a().toggleOnTrue(
+    new RunIntake(indexer, intake)
+    .andThen(new InstantCommand (()-> driverXbox.getHID().setRumble(RumbleType.kBothRumble, 1)))
+    .andThen(new WaitCommand(5))
+    .andThen(new InstantCommand (()->driverXbox.getHID().setRumble(RumbleType.kBothRumble, 0))));
+    
+
     driverXbox.start().onTrue(new InstantCommand(() -> {
       driveMode = !driveMode;
     }));
+
     driverXbox.x().onTrue(new ShootNote(shooter, indexer, true)
         .andThen(new InstantCommand(() -> {
           shooter.stop();

@@ -10,6 +10,11 @@
         "header": {
           "open": true
         }
+      },
+      "Talon SRX[14]": {
+        "header": {
+          "open": true
+        }
       }
     }
   },

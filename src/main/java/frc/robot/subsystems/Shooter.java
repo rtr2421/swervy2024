@@ -71,8 +71,8 @@ public class Shooter extends SubsystemBase {
    */
   public void lowShot() {
     flap.set(DoubleSolenoid.Value.kForward);
-    shooterMotor1.set(-0.5);
-    shooterMotor2.set(0.5);
+    shooterMotor1.set(-0.1);
+    shooterMotor2.set(0.1);
     //shooterPid.setReference(lowReference, CANSparkMax.ControlType.kSmartVelocity);
     shootHigh = false;
   }
@@ -86,6 +86,14 @@ public class Shooter extends SubsystemBase {
     shooterMotor2.set(1);
     flap.set(DoubleSolenoid.Value.kReverse);
     shootHigh = true;
+  }
+
+  public void extendTongue() {
+    flap.set(DoubleSolenoid.Value.kForward);
+  }
+
+  public void retractTongue() {
+    flap.set(DoubleSolenoid.Value.kReverse);
   }
 
   /**

@@ -77,8 +77,8 @@ public class RobotContainer {
             OperatorConstants.LEFT_Y_DEADBAND),
         () -> -MathUtil.applyDeadband(driverJoystick.getX(),
             OperatorConstants.LEFT_X_DEADBAND),
-        () -> -driverJoystick.getTwist(), 
-        () -> driverJoystick.getThrottle(),
+        () -> -driverJoystick.getThrottle(), // For some reason, the twist and throttle are reversed 
+        () -> -driverJoystick.getTwist(),
         () -> driveMode);
 
     drive.setDefaultCommand(teleopDrive);

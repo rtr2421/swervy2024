@@ -24,15 +24,14 @@ public class ShootNote extends SequentialCommandGroup {
     
     if (highShot) {
       addCommands(new InstantCommand(()-> shooter.highShot())
-        .andThen(new WaitUntilCommand(shooter::atSpeed))
-        .andThen(new WaitCommand(1.5))
+        .andThen(new WaitUntilCommand(shooter::atSpeed).withTimeout(1))
         .andThen(new InstantCommand(()-> indexer.startShooting()))
-        .andThen(new WaitCommand(0.7)));
+        .andThen(new WaitUntilCommand(shooter::atlowSpeed).withTimeout(0.5))
+        .andThen(new WaitUntilCommand(shooter::atSpeed).withTimeout(0.5)));
   
       } else { 
         addCommands(new InstantCommand(()-> shooter.lowShot())
         .andThen(new WaitUntilCommand(shooter::atSpeed))
-        .andThen(new WaitCommand(0.5))
         .andThen(new InstantCommand(()-> indexer.startShooting()))
         .andThen(new WaitCommand(0.7))
         .andThen(new InstantCommand(() -> shooter.retractTongue()))

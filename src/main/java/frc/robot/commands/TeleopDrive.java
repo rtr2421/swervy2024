@@ -23,13 +23,14 @@ public class TeleopDrive extends Command
   private final DoubleSupplier   omega;
   private final BooleanSupplier  driveMode;
   private final SwerveController controller;
+  private final DoubleSupplier throttle;
 
   /**
    * Creates a new ExampleCommand.
    *
    * @param swerve The subsystem used by this command.
    */
-  public TeleopDrive(SwerveSubsystem swerve, DoubleSupplier vX, DoubleSupplier vY, DoubleSupplier omega,
+  public TeleopDrive(SwerveSubsystem swerve, DoubleSupplier vX, DoubleSupplier vY, DoubleSupplier omega, DoubleSupplier throttle,
                      BooleanSupplier driveMode)
   {
     this.swerve = swerve;
@@ -38,6 +39,7 @@ public class TeleopDrive extends Command
     this.omega = omega;
     this.driveMode = driveMode;
     this.controller = swerve.getSwerveController();
+    this.throttle = throttle;
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(swerve);
   }
@@ -52,9 +54,9 @@ public class TeleopDrive extends Command
   @Override
   public void execute()
   {
-    double xVelocity   = Math.pow(vX.getAsDouble(), 3);
-    double yVelocity   = Math.pow(vY.getAsDouble(), 3);
-    double angVelocity = Math.pow(omega.getAsDouble(), 3);
+    double xVelocity   = Math.pow(vX.getAsDouble() * (throttle.getAsDouble() + 1)/2, 3);
+    double yVelocity   = Math.pow(vY.getAsDouble() * (throttle.getAsDouble() + 1)/2, 3);
+    double angVelocity = Math.pow(omega.getAsDouble() * (throttle.getAsDouble() + 1)/2, 3);
     SmartDashboard.putNumber("vX", xVelocity);
     SmartDashboard.putNumber("vY", yVelocity);
     SmartDashboard.putNumber("omega", angVelocity);

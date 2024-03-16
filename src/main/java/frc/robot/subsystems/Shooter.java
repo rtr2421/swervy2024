@@ -35,8 +35,8 @@ public class Shooter extends SubsystemBase {
   private final RelativeEncoder shooterEncoder2 = shooterMotor2.getEncoder();
   private SparkPIDController shooterPid2 = shooterMotor2.getPIDController();
 
-  private double lowReference = 700;
-  private double highReference = 6000;
+  private double lowReference = 550;
+  private double highReference = 5500;
   private boolean shootHigh;
   // PID coefficients
   private final double kP = 6e-2;
@@ -118,13 +118,26 @@ public class Shooter extends SubsystemBase {
    * Returns true if at right speed
    */
   public boolean atSpeed() {
-    return true;
-    /* 
-    if (shootHigh){
-      return (highReference - 20 < shooterEncoder1.getVelocity() && shooterEncoder1.getVelocity() < highReference + 20);
+    
+    
+    /*if (shootHigh){
+      return (highReference - 20 < shooterEncoder1.getVelocity() && shooterEncoder2.getVelocity() < highReference + 20);
     } else {
-      return (lowReference - 20 < shooterEncoder1.getVelocity() && shooterEncoder1.getVelocity() < lowReference + 20);
+      return (lowReference - 20 < shooterEncoder1.getVelocity() && shooterEncoder2.getVelocity() < lowReference + 20);
     }*/
+    if (shootHigh){
+      return (highReference < shooterEncoder1.getVelocity() && shooterEncoder2.getVelocity() > highReference);
+    } else {
+      return (lowReference < shooterEncoder1.getVelocity() && shooterEncoder2.getVelocity() > lowReference);
+    }
+  }
+  public boolean atlowSpeed() {
+    if (shootHigh){
+      return (highReference-10 > shooterEncoder1.getVelocity() && shooterEncoder2.getVelocity() < highReference-10);
+    } else {
+      return (lowReference-10 > shooterEncoder1.getVelocity() && shooterEncoder2.getVelocity() < lowReference-10);
+    }
+
   }
 
 }

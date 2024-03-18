@@ -39,11 +39,13 @@ public class Shooter extends SubsystemBase {
   private double highReference = 5500;
   private boolean shootHigh;
   // PID coefficients
-  private final double kP = 6e-2;
+  // private final double kP = 6e-2;
+  private final double kP = 0.001;
   private final double kI = 0;
   private final double kD = 0;
   private final double kIz = 0;
-  private final double kFF = 0.000015;
+  // private final double kFF = 0.000015;
+  private final double kFF = 0.0;
   private final double kMaxOutput = 1;
   private final double kMinOutput = -1;
   private final double maxRPM = 5700;
@@ -64,8 +66,11 @@ public class Shooter extends SubsystemBase {
     shooterPid2.setFF(kFF);
     shooterPid2.setOutputRange(kMinOutput, kMaxOutput);
     shooterMotor2.setIdleMode(IdleMode.kCoast);
-    
     tongueCompressor.enableDigital();
+    shooterPid1.setFeedbackDevice(shooterEncoder1);
+    shooterPid2.setFeedbackDevice(shooterEncoder2);
+    // shooterEncoder1.setVelocityConversionFactor(1);
+    // shooterEncoder2.setVelocityConversionFactor(1);
   }
 
 
@@ -82,7 +87,7 @@ public class Shooter extends SubsystemBase {
     flap.set(DoubleSolenoid.Value.kForward);
     shooterMotor1.set(-0.1);
     shooterMotor2.set(0.1);
-    //shooterPid.setReference(lowReference, CANSparkMax.ControlType.kSmartVelocity);
+    //shooterPid.setReference(lowReference, CANSparkMax.ControlType.kVelocity);
     // shootHigh = false;
   }
 
@@ -90,11 +95,23 @@ public class Shooter extends SubsystemBase {
    * sets motor and flap for highshot
    */
   public void highShot() {
-    //shooterPid.setReference(highReference, CANSparkMax.ControlType.kSmartVelocity);
-    shooterMotor1.set(-1);
-    shooterMotor2.set(1);
+    shooterPid1.setReference(-highReference, CANSparkMax.ControlType.kVelocity);
+    shooterPid2.setReference(highReference, CANSparkMax.ControlType.kVelocity);
+    // shooterMotor1.set(-1);
+    // shooterMotor2.set(1);
     flap.set(DoubleSolenoid.Value.kReverse);
     // shootHigh = true;
+  }
+
+  public void setVelocity(double velocity1, double velocity2) {
+    shooterPid1.setReference(-velocity1, CANSparkMax.ControlType.kVelocity);
+    shooterPid2.setReference(velocity2, CANSparkMax.ControlType.kVelocity);
+    System.out.println("setting shooter velocity1 " + velocity1 + ". velocity2 " + velocity2);
+  }
+
+  public void setP(double p){
+    shooterPid1.setP(p);
+    shooterPid2.setP(p);
   }
 
   public void extendTongue() {

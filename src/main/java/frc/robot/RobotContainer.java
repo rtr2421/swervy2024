@@ -120,6 +120,16 @@ public class RobotContainer {
     // pressed,
     // cancelling on release.
 
+    SmartDashboard.putNumber("ShooterSpeed1", 1000);
+    SmartDashboard.putNumber("ShooterSpeed2", 1000);
+    SmartDashboard.putData("SetShooterVelocity", new StartEndCommand(
+      () -> shooter.setVelocity(SmartDashboard.getNumber("ShooterSpeed1", 1000),
+        SmartDashboard.getNumber("ShooterSpeed2", 1000)),
+     () -> shooter.stop(), shooter));
+    SmartDashboard.putNumber("ShooterP", 0.001);
+    SmartDashboard.putData("SetShooterP", new InstantCommand(
+      () -> shooter.setP(SmartDashboard.getNumber("ShooterP", 0.001))));
+    
     driverXbox.a().toggleOnTrue(
     new RunIntake(indexer, intake)
     .andThen(new InstantCommand (()-> driverXbox.getHID().setRumble(RumbleType.kBothRumble, 1)))

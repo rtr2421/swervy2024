@@ -98,10 +98,10 @@ public class Shooter extends SubsystemBase {
    * sets motor and flap for highshot
    */
   public void highShot() {
-    shooterPid1.setReference(-highReference, CANSparkMax.ControlType.kVelocity);
-    shooterPid2.setReference(highReference, CANSparkMax.ControlType.kVelocity);
-    // shooterMotor1.set(-1);
-    // shooterMotor2.set(1);
+    // shooterPid1.setReference(-highReference, CANSparkMax.ControlType.kVelocity, 0, -lowReference/maxRPM*12);
+    // shooterPid2.setReference(highReference, CANSparkMax.ControlType.kVelocity, 0, lowReference/maxRPM*12);
+    shooterMotor1.set(-0.7);
+    shooterMotor2.set(1);
     flap.set(DoubleSolenoid.Value.kReverse);
     // shootHigh = true;
   }
@@ -145,15 +145,15 @@ public class Shooter extends SubsystemBase {
     } else {
       return (lowReference - 20 < shooterEncoder1.getVelocity() && shooterEncoder2.getVelocity() < lowReference + 20);
     }*/
-    if (shootHigh){
-      return (highReference < shooterEncoder1.getVelocity() && shooterEncoder2.getVelocity() > highReference);
-    } else {
-      return (lowReference < shooterEncoder1.getVelocity() && shooterEncoder2.getVelocity() > lowReference);
-    }
+    return (highReference-50 < shooterEncoder1.getVelocity() && shooterEncoder2.getVelocity() > highReference -50);
   }
   public boolean atlowSpeed() {
       return (lowReference-20 < shooterEncoder1.getVelocity() && shooterEncoder2.getVelocity() > lowReference-20);
 
+  }
+
+  public boolean slowedDown(){
+    return ( highReference - 500> shooterEncoder1.getVelocity() && shooterEncoder2.getVelocity() < highReference - 500);
   }
 
 }

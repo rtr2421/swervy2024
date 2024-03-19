@@ -35,12 +35,12 @@ public class Shooter extends SubsystemBase {
   private final RelativeEncoder shooterEncoder2 = shooterMotor2.getEncoder();
   private SparkPIDController shooterPid2 = shooterMotor2.getPIDController();
 
-  private double lowReference = 550;
+  private double lowReference = 210;
   private double highReference = 5500;
   private boolean shootHigh;
   // PID coefficients
   // private final double kP = 6e-2;
-  private final double kP = 0.001;
+  private final double kP = 0.0004;
   private final double kI = 0;
   private final double kD = 0;
   private final double kIz = 0;
@@ -85,8 +85,11 @@ public class Shooter extends SubsystemBase {
    */
   public void lowShot() {
     flap.set(DoubleSolenoid.Value.kForward);
-    shooterMotor1.set(-0.1);
-    shooterMotor2.set(0.1);
+    // shooterMotor1.set(-0.1);
+    // shooterMotor2.set(0.1);
+    shooterPid1.setReference(-lowReference, CANSparkMax.ControlType.kVelocity, 0, -lowReference/maxRPM*12);
+    shooterPid2.setReference(lowReference, CANSparkMax.ControlType.kVelocity, 0, lowReference/maxRPM*12);
+
     //shooterPid.setReference(lowReference, CANSparkMax.ControlType.kVelocity);
     // shootHigh = false;
   }
@@ -104,8 +107,8 @@ public class Shooter extends SubsystemBase {
   }
 
   public void setVelocity(double velocity1, double velocity2) {
-    shooterPid1.setReference(-velocity1, CANSparkMax.ControlType.kVelocity);
-    shooterPid2.setReference(velocity2, CANSparkMax.ControlType.kVelocity);
+    shooterPid1.setReference(-velocity1, CANSparkMax.ControlType.kVelocity, 0, -velocity1/maxRPM*12);
+    shooterPid2.setReference(velocity2, CANSparkMax.ControlType.kVelocity, 0, velocity2/maxRPM*12);
     System.out.println("setting shooter velocity1 " + velocity1 + ". velocity2 " + velocity2);
   }
 
@@ -149,11 +152,7 @@ public class Shooter extends SubsystemBase {
     }
   }
   public boolean atlowSpeed() {
-    if (shootHigh){
-      return (highReference-50 > shooterEncoder1.getVelocity() && shooterEncoder2.getVelocity() < highReference-50);
-    } else {
-      return (lowReference-50 > shooterEncoder1.getVelocity() && shooterEncoder2.getVelocity() < lowReference-50);
-    }
+      return (lowReference-20 < shooterEncoder1.getVelocity() && shooterEncoder2.getVelocity() > lowReference-20);
 
   }
 

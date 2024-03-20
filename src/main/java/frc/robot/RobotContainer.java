@@ -133,7 +133,7 @@ public class RobotContainer {
     driverXbox.a().toggleOnTrue(
     new RunIntake(indexer, intake)
     .andThen(new InstantCommand (()-> driverXbox.getHID().setRumble(RumbleType.kBothRumble, 1)))
-    .andThen(new WaitCommand(5))
+    .andThen(new WaitCommand(1))
     .andThen(new InstantCommand (()->driverXbox.getHID().setRumble(RumbleType.kBothRumble, 0))));
     
 

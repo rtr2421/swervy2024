@@ -3,9 +3,11 @@
   "robotLength": 0.9144,
   "holonomicMode": true,
   "pathFolders": [
-    "leftShootClose",
+    "threeShotRight",
     "centerFarHoop",
+    "closeRight",
     "leftFar",
+    "leftShootClose",
     "rightShoot",
     "shoot2HighShots",
     "toTheLeft",

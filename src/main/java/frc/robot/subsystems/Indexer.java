@@ -43,7 +43,7 @@ public class Indexer extends SubsystemBase {
   }
 
   public void startShootingLow(){
-    indexMotor.set(-.10);
+    indexMotor.set(-.25);
   }
     
 

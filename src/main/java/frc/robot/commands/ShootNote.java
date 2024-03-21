@@ -33,13 +33,14 @@ public class ShootNote extends SequentialCommandGroup {
         addCommands(new InstantCommand(()-> shooter.lowShot())
         // .andThen(new WaitUntilCommand(shooter::atlowSpeed)).withTimeout(0.5)
         .andThen(new InstantCommand(()-> indexer.startShootingLow()))
-        .andThen(new WaitCommand(2.2))
+        .andThen(new WaitCommand(1.2))
         .andThen(new InstantCommand(() -> shooter.retractTongue()))
         .andThen(new WaitCommand(0.3))
         .andThen(new InstantCommand(() -> shooter.extendTongue()))
         .andThen(new WaitCommand(1))
         // .andThen(new InstantCommand(() -> shooter.retractTongue()))
         );
+        
       }
 
     

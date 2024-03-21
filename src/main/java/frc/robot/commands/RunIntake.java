@@ -42,6 +42,7 @@ public class RunIntake extends Command {
   // Returns true when the playing piece is detected.
   @Override
   public boolean isFinished() {
-    return intake.isLoaded();
+  return intake.isLoaded();
+   
   }
 }

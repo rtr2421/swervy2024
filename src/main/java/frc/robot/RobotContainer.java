@@ -26,6 +26,7 @@ import edu.wpi.first.wpilibj2.command.button.Trigger;
 import frc.robot.Constants.OperatorConstants;
 import frc.robot.commands.Autos;
 import frc.robot.commands.RunIntake;
+import frc.robot.commands.RunIntakeWithDelay;
 import frc.robot.commands.ShootNote;
 import frc.robot.commands.TeleopDrive;
 import frc.robot.subsystems.Climber;
@@ -131,7 +132,7 @@ public class RobotContainer {
       () -> shooter.setP(SmartDashboard.getNumber("ShooterP", 0.001))));
     
     driverXbox.a().toggleOnTrue(
-    new RunIntake(indexer, intake)
+    new RunIntakeWithDelay(indexer, intake)
     .andThen(new InstantCommand (()-> driverXbox.getHID().setRumble(RumbleType.kBothRumble, 1)))
     .andThen(new WaitCommand(1))
     .andThen(new InstantCommand (()->driverXbox.getHID().setRumble(RumbleType.kBothRumble, 0))));
@@ -189,7 +190,7 @@ public class RobotContainer {
           shooter.stop();
           indexer.stop();
         })));
-    NamedCommands.registerCommand("RunIntake", new RunIntake(indexer, intake));
+    NamedCommands.registerCommand("RunIntake", new RunIntakeWithDelay(indexer, intake));
 
     autonomousChooser.setDefaultOption("Drive forward", Autos.driveForward(drive));
     autonomousChooser.addOption("Right 1 shot", Autos.simpleAutoRight());

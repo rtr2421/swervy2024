@@ -196,15 +196,15 @@ public class RobotContainer {
     // autonomousChooser.addOption("Right 3 shot", Autos.rightShoot3Shots());
 
     autonomousChooser.setDefaultOption("Drive forward", Autos.driveForward(drive));
-    autonomousChooser.addOption("Right 1 shot", Autos.simpleAutoRight());
-    autonomousChooser.addOption("Left 1 shot", Autos.simpleAutoLeft());
+    autonomousChooser.addOption("Small side 1 shot", Autos.simpleAutoRight());
+    autonomousChooser.addOption("Big side 1 shot", Autos.simpleAutoLeft());
     autonomousChooser.addOption("Centered 2 shot auto", Autos.shoot2HighShots());
     autonomousChooser.addOption("Centered 2 shot + center far Hoop", Autos.centerFarHoop());
-    autonomousChooser.addOption("Left side Shoot 3 Shots", Autos.leftShoot3Shots());
-    autonomousChooser.addOption("Disrupt Center From Right", Autos.disruptCenterRight());
-    autonomousChooser.addOption("Shoot 2 from left side", Autos.leftShootClose());
-    autonomousChooser.addOption("Shoot 3 from right", Autos.threeShotRight());
-    autonomousChooser.addOption("Shoot 2 from right", Autos.closeRightAuto());
+    autonomousChooser.addOption("Big side Shoot 3", Autos.leftShoot3Shots());
+    autonomousChooser.addOption("Disrupt Center From Small side", Autos.disruptCenterRight());
+    autonomousChooser.addOption("Shoot 2 from Big side", Autos.leftShootClose());
+    autonomousChooser.addOption("Shoot 3 from Small side", Autos.threeShotRight());
+    autonomousChooser.addOption("Shoot 2 from Small side", Autos.closeRightAuto());
 
     autonomousChooser.addOption("Centered Shoot 2 Non path planner",
         Autos.shoot2Pieces(drive, shooter, intake, indexer));

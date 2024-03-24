@@ -41,7 +41,7 @@ public class Shooter extends SubsystemBase {
   // PID coefficients
   // private final double kP = 6e-2;
   private final double kP = 0.0004;
-  private final double kI = 0;
+  private final double kI = 0.000001;
   private final double kD = 0;
   private final double kIz = 0;
   // private final double kFF = 0.000015;

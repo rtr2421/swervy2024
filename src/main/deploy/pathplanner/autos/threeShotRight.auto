@@ -1,6 +1,12 @@
 {
   "version": 1.0,
-  "startingPose": null,
+  "startingPose": {
+    "position": {
+      "x": 1.0131083942398889,
+      "y": 6.670108912683995
+    },
+    "rotation": 57.290587029182795
+  },
   "command": {
     "type": "sequential",
     "data": {

@@ -19,6 +19,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
+import edu.wpi.first.wpilibj2.command.RunCommand;
 import edu.wpi.first.wpilibj2.command.StartEndCommand;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
@@ -191,20 +192,26 @@ public class RobotContainer {
           indexer.stop();
         })));
     NamedCommands.registerCommand("RunIntake", new RunIntakeWithDelay(indexer, intake));
+    NamedCommands.registerCommand("RunIntakeAndShoot", new RunCommand(() -> {intake.start(); indexer.startIntaking(); shooter.highShot();}, intake, indexer, shooter));
 
 
     // autonomousChooser.addOption("Right 3 shot", Autos.rightShoot3Shots());
 
     autonomousChooser.setDefaultOption("Drive forward", Autos.driveForward(drive));
-    autonomousChooser.addOption("Small side 1 shot", Autos.simpleAutoRight());
-    autonomousChooser.addOption("Big side 1 shot", Autos.simpleAutoLeft());
-    autonomousChooser.addOption("Centered 2 shot auto", Autos.shoot2HighShots());
-    autonomousChooser.addOption("Centered 2 shot + center far Hoop", Autos.centerFarHoop());
-    autonomousChooser.addOption("Big side Shoot 3", Autos.leftShoot3Shots());
-    autonomousChooser.addOption("Disrupt Center From Small side", Autos.disruptCenterRight());
-    autonomousChooser.addOption("Shoot 2 from Big side", Autos.leftShootClose());
-    autonomousChooser.addOption("Shoot 3 from Small side", Autos.threeShotRight());
-    autonomousChooser.addOption("Shoot 2 from Small side", Autos.closeRightAuto());
+    autonomousChooser.addOption("Small side 1 shot", Autos.simpleAutoSmall());
+    autonomousChooser.addOption("Big side 1 shot", Autos.simpleAutoBig());
+
+    autonomousChooser.addOption("Shoot 2 from Center", Autos.centerShoot2Close());
+    autonomousChooser.addOption("Shoot 3 from Center (should do)", Autos.centerShoot3Far());
+
+    autonomousChooser.addOption("Shoot 2 from Big side", Autos.bigShoot2Close());
+    autonomousChooser.addOption("Shoot 3 from Big side (should do)", Autos.bigShoot3Far());
+    autonomousChooser.addOption("Shoot 2 farthest notes from big side", Autos.bigShoot3Far2());
+
+    autonomousChooser.addOption("Shoot 3 from Small side (should do)", Autos.smallShoot3Far());
+    autonomousChooser.addOption("Shoot 2 from Small side", Autos.smallShoot2Close());
+    autonomousChooser.addOption("Disrupt Center From Small side", Autos.smallDisruptCenter());
+    
 
     autonomousChooser.addOption("Centered Shoot 2 Non path planner",
         Autos.shoot2Pieces(drive, shooter, intake, indexer));

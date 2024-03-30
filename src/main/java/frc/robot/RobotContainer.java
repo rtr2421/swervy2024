@@ -56,6 +56,8 @@ public class RobotContainer {
   private Boolean driveMode = true;
   // Replace with CommandPS4Controller or CommandJoystick if needed
   private final CommandXboxController driverXbox = new CommandXboxController(OperatorConstants.kDriverControllerPort);
+    private final CommandXboxController helperXbox = new CommandXboxController(OperatorConstants.kHelperControllerPort);
+
   private SendableChooser<Command> autonomousChooser = new SendableChooser<>();
 
   private final Field2d field;
@@ -132,34 +134,47 @@ public class RobotContainer {
     SmartDashboard.putData("SetShooterP", new InstantCommand(
       () -> shooter.setP(SmartDashboard.getNumber("ShooterP", 0.001))));
     
-    driverXbox.a().toggleOnTrue(
-    new RunIntakeWithDelay(indexer, intake)
-    .andThen(new InstantCommand (()-> driverXbox.getHID().setRumble(RumbleType.kBothRumble, 1)))
-    .andThen(new WaitCommand(1))
-    .andThen(new InstantCommand (()->driverXbox.getHID().setRumble(RumbleType.kBothRumble, 0))));
+
+    SmartDashboard.putData("Reset Pose", new InstantCommand(() -> resetPoseAngle()));
+    SmartDashboard.putData("Override Climber Safety",
+        new StartEndCommand(() -> climber.setSafety(false), () -> climber.setSafety(true)));
     
 
-    driverXbox.start().onTrue(new InstantCommand(() -> {
+    commonBindings(driverXbox);
+    commonBindings(helperXbox);
+
+
+  }
+
+  private void commonBindings(CommandXboxController joystick) {
+    joystick.a().toggleOnTrue(
+    new RunIntakeWithDelay(indexer, intake)
+    .andThen(new InstantCommand (()-> joystick.getHID().setRumble(RumbleType.kBothRumble, 1)))
+    .andThen(new WaitCommand(1))
+    .andThen(new InstantCommand (()->joystick.getHID().setRumble(RumbleType.kBothRumble, 0))));
+    
+
+    joystick.start().onTrue(new InstantCommand(() -> {
       driveMode = !driveMode;
     }));
 
-    driverXbox.x().onTrue(new ShootNote(shooter, indexer, true)
+    joystick.x().onTrue(new ShootNote(shooter, indexer, true)
         .andThen(new InstantCommand(() -> {
           shooter.stop();
           indexer.stop();
         })));
-    driverXbox.b().onTrue(new ShootNote(shooter, indexer, false)
+    joystick.b().onTrue(new ShootNote(shooter, indexer, false)
         .andThen(new InstantCommand(() -> {
           shooter.stop();
           indexer.stop();
         })));
 
-    driverXbox.povDown().whileTrue(new StartEndCommand(() -> climber.retract(), () -> climber.stop(), climber));
-    driverXbox.povUp().whileTrue(new StartEndCommand(() -> climber.extend(), () -> climber.stop(), climber));
+    joystick.povDown().whileTrue(new StartEndCommand(() -> climber.retract(), () -> climber.stop(), climber));
+    joystick.povUp().whileTrue(new StartEndCommand(() -> climber.extend(), () -> climber.stop(), climber));
 
     // driverXbox.y().toggleOnTrue(new RunClimber(climber));
 
-    driverXbox
+    joystick
         .y()
         .whileTrue(new InstantCommand(() -> {
           indexer.reverse();
@@ -169,10 +184,6 @@ public class RobotContainer {
           indexer.stop();
           intake.stop();
         }, intake));
-
-    SmartDashboard.putData("Reset Pose", new InstantCommand(() -> resetPoseAngle()));
-    SmartDashboard.putData("Override Climber Safety",
-        new StartEndCommand(() -> climber.setSafety(false), () -> climber.setSafety(true)));
   }
 
   /**

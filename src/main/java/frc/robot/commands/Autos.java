@@ -55,48 +55,50 @@ public final class Autos {
 
 
 
-   public static Command shoot2HighShots(){
-    return new PathPlannerAuto("shoot2HighShots");
+   public static Command centerShoot2Close(){
+    return new PathPlannerAuto("centerShoot2Close");
   }
 
   
-  public static Command centerFarHoop(){
-    return new PathPlannerAuto("centerFarHoop");
+  public static Command centerShoot3Far(){
+    return new PathPlannerAuto("centerShoot3Far");
   }
 
-  public static Command leftShoot3Shots(){
-    return new PathPlannerAuto("leftShoot3shots");
+  public static Command bigShoot3Far(){
+    return new PathPlannerAuto("bigShoot3Far");
   }
   
-  public static Command simpleAutoRight() {
-    return new PathPlannerAuto("simpleAutoRight");
+  public static Command simpleAutoSmall() {
+    return new PathPlannerAuto("simpleAutoSmall");
   }
 
-  public static Command simpleAutoLeft() {
-    return new PathPlannerAuto("simpleAutoLeft");
+  public static Command simpleAutoBig() {
+    return new PathPlannerAuto("simpleAutoBig");
   }
 
-  public static Command leftShootClose() {
-    return new PathPlannerAuto("leftShootClose");
+  public static Command bigShoot2Close() {
+    return new PathPlannerAuto("bigShoot2Close");
   }
 
 
-  public static Command disruptCenterRight() {
-    return new PathPlannerAuto("disruptCenterRight");
+  public static Command smallDisruptCenter() {
+    return new PathPlannerAuto("smallDisruptCenter");
   }
 
   public static Command rightShoot3Shots() {
     return new PathPlannerAuto("rightShoot3Shots");
   }
 
-  public static Command threeShotRight() {
-    return new PathPlannerAuto("threeShotRight");
+  public static Command smallShoot3Far() {
+    return new PathPlannerAuto("smallShoot3Far");
   }
 
-  public static Command closeRightAuto() {
-    return new PathPlannerAuto("closeRightAuto");
+  public static Command smallShoot2Close() {
+    return new PathPlannerAuto("smallShoot2Close");
   }
-
+  public static Command bigShoot3Far2() {
+    return new PathPlannerAuto("bigShoot3Far2");
+  }
 
 
 

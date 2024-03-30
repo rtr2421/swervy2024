@@ -8,8 +8,8 @@
       },
       "prevControl": null,
       "nextControl": {
-        "x": 1.9060784275414722,
-        "y": 6.7095211113499165
+        "x": 1.5311346007307416,
+        "y": 8.40663527480901
       },
       "isLocked": false,
       "linkedName": null
@@ -20,15 +20,21 @@
         "y": 7.449541822158937
       },
       "prevControl": {
-        "x": 7.0960903460322236,
-        "y": 6.541783083564537
+        "x": 6.543541548618673,
+        "y": 7.548211250264526
       },
       "nextControl": null,
       "isLocked": false,
       "linkedName": "disruptCenterRight1"
     }
   ],
-  "rotationTargets": [],
+  "rotationTargets": [
+    {
+      "waypointRelativePos": 0.3,
+      "rotationDegrees": 0,
+      "rotateFast": false
+    }
+  ],
   "constraintZones": [],
   "eventMarkers": [],
   "globalConstraints": {
@@ -39,8 +45,8 @@
   },
   "goalEndState": {
     "velocity": 0,
-    "rotation": 16.31385242626059,
-    "rotateFast": false
+    "rotation": -1.8778774475486968,
+    "rotateFast": true
   },
   "reversed": false,
   "folder": "trollCenterRight",

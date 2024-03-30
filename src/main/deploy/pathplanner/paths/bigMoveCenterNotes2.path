@@ -3,13 +3,13 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 8.428127625486022,
-        "y": 0.7696215392430785
+        "x": 8.410786579062458,
+        "y": 0.8314693947504864
       },
       "prevControl": null,
       "nextControl": {
-        "x": 7.027021746351186,
-        "y": 1.637912506594245
+        "x": 7.009680699927622,
+        "y": 1.699760362101653
       },
       "isLocked": false,
       "linkedName": "bigMoveCenterNotes1"
@@ -20,8 +20,8 @@
         "y": 2.4371348742697485
       },
       "prevControl": {
-        "x": 7.309724311756318,
-        "y": 2.4371348742697485
+        "x": 7.027021746351186,
+        "y": 2.595005959242688
       },
       "nextControl": null,
       "isLocked": false,
@@ -39,11 +39,11 @@
   },
   "goalEndState": {
     "velocity": 0,
-    "rotation": 0,
+    "rotation": -11.30993247402029,
     "rotateFast": false
   },
   "reversed": false,
-  "folder": "bigMoveCenterNotes",
+  "folder": null,
   "previewStartingState": {
     "rotation": 0,
     "velocity": 0

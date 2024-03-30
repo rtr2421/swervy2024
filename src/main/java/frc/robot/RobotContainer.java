@@ -1,4 +1,4 @@
-// Copyright (c) FIRST and other WPILib contributors.
+ // Copyright (c) FIRST and other WPILib contributors.
 // Open Source Software; you can modify and/or share it under the terms of
 // the WPILib BSD license file in the root directory of this project.
 
@@ -207,6 +207,7 @@ public class RobotContainer {
     autonomousChooser.addOption("Shoot 2 from Big side", Autos.bigShoot2Close());
     autonomousChooser.addOption("Shoot 3 from Big side (should do)", Autos.bigShoot3Far());
     autonomousChooser.addOption("Shoot 2 farthest notes from big side", Autos.bigShoot3Far2());
+    autonomousChooser.addOption("bigMoveCenterNotes", Autos.bigMoveCenterNotes());
 
     autonomousChooser.addOption("Shoot 3 from Small side (should do)", Autos.smallShoot3Far());
     autonomousChooser.addOption("Shoot 2 from Small side", Autos.smallShoot2Close());

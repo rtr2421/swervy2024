@@ -24,7 +24,7 @@
               {
                 "type": "named",
                 "data": {
-                  "name": null
+                  "name": "RunIntakeAndShoot"
                 }
               },
               {
@@ -41,6 +41,24 @@
                       "type": "path",
                       "data": {
                         "pathName": "bigMoveCenterNotes2"
+                      }
+                    },
+                    {
+                      "type": "path",
+                      "data": {
+                        "pathName": "bigMoveCenterNotes3"
+                      }
+                    },
+                    {
+                      "type": "path",
+                      "data": {
+                        "pathName": "bigMoveCenterNotes4"
+                      }
+                    },
+                    {
+                      "type": "path",
+                      "data": {
+                        "pathName": "bigMoveCenterNotes5"
                       }
                     }
                   ]

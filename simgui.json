@@ -4,7 +4,6 @@
       "window": {
         "visible": true
       }
-
     },
     "Other Devices": {
       "SPARK MAX [17]": {
@@ -25,6 +24,8 @@
       "/SmartDashboard/Field": "Field2d",
       "/SmartDashboard/Override Climber Safety": "Command",
       "/SmartDashboard/Reset Pose": "Command",
+      "/SmartDashboard/SetShooterP": "Command",
+      "/SmartDashboard/SetShooterVelocity": "Command",
       "/SmartDashboard/auto choices": "String Chooser"
     },
     "windows": {

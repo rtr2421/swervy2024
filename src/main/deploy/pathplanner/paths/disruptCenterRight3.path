@@ -3,16 +3,16 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 8.122252398350952,
-        "y": 5.8313632011879415
+        "x": 8.14198628397257,
+        "y": 7.401248696933913
       },
       "prevControl": null,
       "nextControl": {
-        "x": 8.299857368940131,
-        "y": 5.486020202811268
+        "x": 8.319591254561749,
+        "y": 7.05590569855724
       },
       "isLocked": false,
-      "linkedName": "disruptCenterRight2"
+      "linkedName": "disruptCenterRight1"
     },
     {
       "anchor": {
@@ -30,71 +30,7 @@
   ],
   "rotationTargets": [],
   "constraintZones": [],
-  "eventMarkers": [
-    {
-      "name": "New Event Marker",
-      "waypointRelativePos": 0.3,
-      "command": {
-        "type": "parallel",
-        "data": {
-          "commands": [
-            {
-              "type": "named",
-              "data": {
-                "name": "RunIntake"
-              }
-            }
-          ]
-        }
-      }
-    },
-    {
-      "name": "New Event Marker",
-      "waypointRelativePos": 0.45,
-      "command": {
-        "type": "parallel",
-        "data": {
-          "commands": [
-            {
-              "type": "named",
-              "data": {
-                "name": "shoot"
-              }
-            },
-            {
-              "type": "named",
-              "data": {
-                "name": "RunIntake"
-              }
-            }
-          ]
-        }
-      }
-    },
-    {
-      "name": "New Event Marker",
-      "waypointRelativePos": 0.7,
-      "command": {
-        "type": "parallel",
-        "data": {
-          "commands": [
-            {
-              "type": "named",
-              "data": {
-                "name": "shoot"
-              }
-            },
-            {
-              "type": "named",
-              "data": {
-                "name": "RunIntake"
-              }
-            }
-          ]
-        }
-      }
-    }
-  ],
+  "eventMarkers": [],
   "globalConstraints": {
     "maxVelocity": 3.0,
     "maxAcceleration": 3.0,
@@ -104,7 +40,7 @@
   "goalEndState": {
     "velocity": 0,
     "rotation": -65.65891006330762,
-    "rotateFast": false
+    "rotateFast": true
   },
   "reversed": false,
   "folder": "trollCenterRight",

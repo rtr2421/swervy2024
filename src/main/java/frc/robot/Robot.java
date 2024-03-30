@@ -4,10 +4,13 @@
 
 package frc.robot;
 
+import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.wpilibj.DataLogManager;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
+import edu.wpi.first.cameraserver.CameraServer;
+import edu.wpi.first.wpilibj.TimedRobot;
 
 /**
  * The VM is configured to automatically run this class, and to call the functions corresponding to
@@ -30,7 +33,16 @@ public class Robot extends TimedRobot {
     // autonomous chooser on the dashboard.
     m_robotContainer = new RobotContainer();
     DataLogManager.start();
+  /**
+ * Uses the CameraServer class to automatically capture video from a USB webcam and send it to the
+ * FRC dashboard without doing any vision processing. This is the easiest way to get camera images
+ * to the dashboard. Just add this to the robotInit() method in your program.
+ */
+ CameraServer.startAutomaticCapture();
   }
+
+
+
 
   /**
    * This function is called every 20 ms, no matter the mode. Use this for items like diagnostics

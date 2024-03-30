@@ -100,6 +100,10 @@ public final class Autos {
     return new PathPlannerAuto("bigShoot3Far2");
   }
 
+  public static Command bigMoveCenterNotes() {
+    return new PathPlannerAuto("bigMoveCenterNotes");
+  }
+
 
 
 

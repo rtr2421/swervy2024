@@ -1,4 +1,4 @@
- // Copyright (c) FIRST and other WPILib contributors.
+// Copyright (c) FIRST and other WPILib contributors.
 // Open Source Software; you can modify and/or share it under the terms of
 // the WPILib BSD license file in the root directory of this project.
 
@@ -56,7 +56,7 @@ public class RobotContainer {
   private Boolean driveMode = true;
   // Replace with CommandPS4Controller or CommandJoystick if needed
   private final CommandXboxController driverXbox = new CommandXboxController(OperatorConstants.kDriverControllerPort);
-    private final CommandXboxController helperXbox = new CommandXboxController(OperatorConstants.kHelperControllerPort);
+  private final CommandXboxController helperXbox = new CommandXboxController(OperatorConstants.kHelperControllerPort);
 
   private SendableChooser<Command> autonomousChooser = new SendableChooser<>();
 
@@ -127,32 +127,28 @@ public class RobotContainer {
     SmartDashboard.putNumber("ShooterSpeed1", 1000);
     SmartDashboard.putNumber("ShooterSpeed2", 1000);
     SmartDashboard.putData("SetShooterVelocity", new StartEndCommand(
-      () -> shooter.setVelocity(SmartDashboard.getNumber("ShooterSpeed1", 1000),
-        SmartDashboard.getNumber("ShooterSpeed2", 1000)),
-     () -> shooter.stop(), shooter));
+        () -> shooter.setVelocity(SmartDashboard.getNumber("ShooterSpeed1", 1000),
+            SmartDashboard.getNumber("ShooterSpeed2", 1000)),
+        () -> shooter.stop(), shooter));
     SmartDashboard.putNumber("ShooterP", 0.001);
     SmartDashboard.putData("SetShooterP", new InstantCommand(
-      () -> shooter.setP(SmartDashboard.getNumber("ShooterP", 0.001))));
-    
+        () -> shooter.setP(SmartDashboard.getNumber("ShooterP", 0.001))));
 
     SmartDashboard.putData("Reset Pose", new InstantCommand(() -> resetPoseAngle()));
     SmartDashboard.putData("Override Climber Safety",
         new StartEndCommand(() -> climber.setSafety(false), () -> climber.setSafety(true)));
-    
 
     commonBindings(driverXbox);
     commonBindings(helperXbox);
-
 
   }
 
   private void commonBindings(CommandXboxController joystick) {
     joystick.a().toggleOnTrue(
-    new RunIntakeWithDelay(indexer, intake)
-    .andThen(new InstantCommand (()-> joystick.getHID().setRumble(RumbleType.kBothRumble, 1)))
-    .andThen(new WaitCommand(1))
-    .andThen(new InstantCommand (()->joystick.getHID().setRumble(RumbleType.kBothRumble, 0))));
-    
+        new RunIntakeWithDelay(indexer, intake)
+            .andThen(new InstantCommand(() -> joystick.getHID().setRumble(RumbleType.kBothRumble, 1)))
+            .andThen(new WaitCommand(1))
+            .andThen(new InstantCommand(() -> joystick.getHID().setRumble(RumbleType.kBothRumble, 0))));
 
     joystick.start().onTrue(new InstantCommand(() -> {
       driveMode = !driveMode;
@@ -203,8 +199,11 @@ public class RobotContainer {
           indexer.stop();
         })));
     NamedCommands.registerCommand("RunIntake", new RunIntakeWithDelay(indexer, intake));
-    NamedCommands.registerCommand("RunIntakeAndShoot", new RunCommand(() -> {intake.start(); indexer.startIntaking(); shooter.highShot();}, intake, indexer, shooter));
-
+    NamedCommands.registerCommand("RunIntakeAndShoot", new RunCommand(() -> {
+      intake.start();
+      indexer.startIntaking();
+      shooter.highShot();
+    }, intake, indexer, shooter));
 
     // autonomousChooser.addOption("Right 3 shot", Autos.rightShoot3Shots());
 
@@ -223,7 +222,6 @@ public class RobotContainer {
     autonomousChooser.addOption("Shoot 3 from Small side (should do)", Autos.smallShoot3Far());
     autonomousChooser.addOption("Shoot 2 from Small side", Autos.smallShoot2Close());
     autonomousChooser.addOption("Disrupt Center From Small side", Autos.smallDisruptCenter());
-    
 
     autonomousChooser.addOption("Centered Shoot 2 Non path planner",
         Autos.shoot2Pieces(drive, shooter, intake, indexer));

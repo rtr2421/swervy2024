@@ -52,7 +52,7 @@ public class RobotContainer {
   private final Shooter shooter = new Shooter();
   private final Indexer indexer = new Indexer();
   private final Climber climber = new Climber();
-  private Boolean driveMode = true;
+  private Boolean fieldOrientedMode = true;
   // Replace with CommandPS4Controller or CommandJoystick if needed
   private final CommandXboxController driverXbox = new CommandXboxController(OperatorConstants.kDriverControllerPort);
   private final CommandXboxController helperXbox = new CommandXboxController(OperatorConstants.kHelperControllerPort);
@@ -79,7 +79,7 @@ public class RobotContainer {
         () -> {
           return -driverXbox.getRightX() + driverXbox.getLeftTriggerAxis() - driverXbox.getRightTriggerAxis();
         },
-        () -> driveMode);
+        () -> fieldOrientedMode);
 
     drive.setDefaultCommand(teleopDrive);
 
@@ -152,7 +152,7 @@ public class RobotContainer {
             .andThen(new InstantCommand(() -> joystick.getHID().setRumble(RumbleType.kBothRumble, 0))));
 
     joystick.start().onTrue(new InstantCommand(() -> {
-      driveMode = !driveMode;
+      fieldOrientedMode = !fieldOrientedMode;
     }));
 
     joystick.x().onTrue(new ShootNote(shooter, indexer, true)

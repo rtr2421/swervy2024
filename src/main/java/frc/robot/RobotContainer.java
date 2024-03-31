@@ -26,7 +26,6 @@ import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 import frc.robot.Constants.OperatorConstants;
 import frc.robot.commands.Autos;
-import frc.robot.commands.RunIntake;
 import frc.robot.commands.RunIntakeWithDelay;
 import frc.robot.commands.ShootNote;
 import frc.robot.commands.TeleopDrive;
@@ -77,7 +76,9 @@ public class RobotContainer {
             OperatorConstants.LEFT_Y_DEADBAND),
         () -> -MathUtil.applyDeadband(driverXbox.getLeftX(),
             OperatorConstants.LEFT_X_DEADBAND),
-        () -> -driverXbox.getRightX(),
+        () -> {
+          return -driverXbox.getRightX() + driverXbox.getLeftTriggerAxis() - driverXbox.getRightTriggerAxis();
+        },
         () -> driveMode);
 
     drive.setDefaultCommand(teleopDrive);

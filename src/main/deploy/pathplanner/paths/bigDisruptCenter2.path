@@ -16,16 +16,16 @@
     },
     {
       "anchor": {
-        "x": 8.230788769269848,
-        "y": 5.870830972431175
+        "x": 8.122252398350952,
+        "y": 5.900431800863602
       },
       "prevControl": {
-        "x": 8.349192082999554,
-        "y": 5.022273890701628
+        "x": 8.240655712080658,
+        "y": 5.051874719134055
       },
       "nextControl": null,
       "isLocked": false,
-      "linkedName": null
+      "linkedName": "bigDisruptCenter2"
     }
   ],
   "rotationTargets": [],

@@ -3,16 +3,16 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 8.23,
-        "y": 5.87
+        "x": 8.122252398350952,
+        "y": 5.900431800863602
       },
       "prevControl": null,
       "nextControl": {
-        "x": 8.250522654891466,
-        "y": 6.719388054160724
+        "x": 8.142775053242417,
+        "y": 6.7498198550243265
       },
       "isLocked": false,
-      "linkedName": null
+      "linkedName": "bigDisruptCenter2"
     },
     {
       "anchor": {
@@ -45,7 +45,7 @@
   "reversed": false,
   "folder": "bigDisruptCenter",
   "previewStartingState": {
-    "rotation": 89.94616795663283,
+    "rotation": 76.55138494831338,
     "velocity": 0
   },
   "useDefaultConstraints": true

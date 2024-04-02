@@ -220,6 +220,7 @@ public class RobotContainer {
     autonomousChooser.addOption("Shoot 3 from Big side (should do)", Autos.bigShoot3Far());
     autonomousChooser.addOption("Shoot 2 farthest notes from big side", Autos.bigShoot3Far2());
     autonomousChooser.addOption("bigMoveCenterNotes", Autos.bigMoveCenterNotes());
+    autonomousChooser.addOption("bigDisruptCenter", Autos.bigDisruptCenter());
 
     autonomousChooser.addOption("Shoot 3 from Small side (should do)", Autos.smallShoot3Far());
     autonomousChooser.addOption("Shoot 2 from Small side", Autos.smallShoot2Close());

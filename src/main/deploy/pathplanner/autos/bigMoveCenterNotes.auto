@@ -18,7 +18,7 @@
           }
         },
         {
-          "type": "deadline",
+          "type": "race",
           "data": {
             "commands": [
               {
@@ -54,14 +54,27 @@
                       "data": {
                         "pathName": "bigMoveCenterNotes4"
                       }
-                    },
-                    {
-                      "type": "path",
-                      "data": {
-                        "pathName": "bigMoveCenterNotes5"
-                      }
                     }
                   ]
+                }
+              }
+            ]
+          }
+        },
+        {
+          "type": "race",
+          "data": {
+            "commands": [
+              {
+                "type": "path",
+                "data": {
+                  "pathName": "bigMoveCenterNotes5"
+                }
+              },
+              {
+                "type": "named",
+                "data": {
+                  "name": "RunIntake"
                 }
               }
             ]

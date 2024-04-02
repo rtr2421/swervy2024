@@ -5,7 +5,7 @@
       "x": 0.86,
       "y": 6.71
     },
-    "rotation": 48.28231586409686
+    "rotation": 47.24037953149573
   },
   "command": {
     "type": "sequential",
@@ -18,13 +18,13 @@
           }
         },
         {
-          "type": "deadline",
+          "type": "race",
           "data": {
             "commands": [
               {
                 "type": "named",
                 "data": {
-                  "name": "RunIntakeAndShoot"
+                  "name": "RunIntakeAndShootSmallSlow"
                 }
               },
               {
@@ -44,6 +44,25 @@
                       }
                     }
                   ]
+                }
+              }
+            ]
+          }
+        },
+        {
+          "type": "race",
+          "data": {
+            "commands": [
+              {
+                "type": "named",
+                "data": {
+                  "name": "RunIntake"
+                }
+              },
+              {
+                "type": "path",
+                "data": {
+                  "pathName": "disruptCenterRight4"
                 }
               }
             ]

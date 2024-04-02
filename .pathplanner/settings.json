@@ -3,6 +3,8 @@
   "robotLength": 0.9144,
   "holonomicMode": true,
   "pathFolders": [
+    "test",
+    "bigDisruptCenter",
     "bigMoveCenterNotes",
     "centerFarHoop",
     "leftFar",

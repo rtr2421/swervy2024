@@ -204,7 +204,8 @@ public class RobotContainer {
         })));
     NamedCommands.registerCommand("RunIntake", new RunIntakeWithDelay(indexer, intake));
     NamedCommands.registerCommand("RunIntakeAndShoot", new RunCommand(() -> {intake.start(); indexer.startIntaking(); shooter.highShot();}, intake, indexer, shooter));
-
+    NamedCommands.registerCommand("RunIntakeAndShootBigSlow", new RunCommand(() -> {intake.start(); indexer.startIntaking(); shooter.bigSlowShot();}, intake, indexer, shooter));
+    NamedCommands.registerCommand("RunIntakeAndShootSmallSlow", new RunCommand(() -> {intake.start(); indexer.startIntaking(); shooter.smallSlowShot();}, intake, indexer, shooter));  
 
     // autonomousChooser.addOption("Right 3 shot", Autos.rightShoot3Shots());
 

@@ -60,9 +60,22 @@
                 }
               },
               {
-                "type": "path",
+                "type": "sequential",
                 "data": {
-                  "pathName": "disruptCenterRight4"
+                  "commands": [
+                    {
+                      "type": "path",
+                      "data": {
+                        "pathName": "disruptCenterRight4"
+                      }
+                    },
+                    {
+                      "type": "wait",
+                      "data": {
+                        "waitTime": 0.4
+                      }
+                    }
+                  ]
                 }
               }
             ]

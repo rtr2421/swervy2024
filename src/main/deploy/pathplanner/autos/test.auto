@@ -12,9 +12,16 @@
     "data": {
       "commands": [
         {
-          "type": "path",
+          "type": "race",
           "data": {
-            "pathName": "test1"
+            "commands": [
+              {
+                "type": "path",
+                "data": {
+                  "pathName": "test1"
+                }
+              }
+            ]
           }
         },
         {

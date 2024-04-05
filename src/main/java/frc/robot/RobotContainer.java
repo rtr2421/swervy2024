@@ -146,9 +146,11 @@ public class RobotContainer {
   private void commonBindings(CommandXboxController joystick) {
     joystick.a().toggleOnTrue(
         new RunIntakeWithDelay(indexer, intake)
-            .andThen(new InstantCommand(() -> joystick.getHID().setRumble(RumbleType.kBothRumble, 1)))
+            .andThen(new InstantCommand(() -> driverXbox.getHID().setRumble(RumbleType.kBothRumble, 1)))
+            .andThen(new InstantCommand(() -> helperXbox.getHID().setRumble(RumbleType.kBothRumble, 1)))
             .andThen(new WaitCommand(1))
-            .andThen(new InstantCommand(() -> joystick.getHID().setRumble(RumbleType.kBothRumble, 0))));
+            .andThen(new InstantCommand(() -> driverXbox.getHID().setRumble(RumbleType.kBothRumble, 0)))
+            .andThen(new InstantCommand(() -> helperXbox.getHID().setRumble(RumbleType.kBothRumble, 0))));
 
     joystick.start().onTrue(new InstantCommand(() -> {
       driveMode = !driveMode;
@@ -216,7 +218,7 @@ public class RobotContainer {
     autonomousChooser.addOption("Shoot 3 from Center (should do)", Autos.centerShoot3Far());
 
     autonomousChooser.addOption("Shoot 2 from Big side", Autos.bigShoot2Close());
-    autonomousChooser.addOption("Shoot 3 from Big side (should do)", Autos.bigShoot3Far());
+    autonomousChooser.addOption("Shoot 3 from Big side (should d)", Autos.bigShoot3Far());
     autonomousChooser.addOption("Shoot 2 farthest notes from big side", Autos.bigShoot3Far2());
     autonomousChooser.addOption("bigMoveCenterNotes", Autos.bigMoveCenterNotes());
     autonomousChooser.addOption("bigDisruptCenter", Autos.bigDisruptCenter());
